@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="200"
-        android:layout_height="70"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:background="#00A1E5"
         android:text="Editar dados"
         tools:layout_editor_absoluteX="108dp"
@@ -17,8 +17,8 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="200"
-        android:layout_height="70"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:background="#00A1E5"
         android:text="Gerir medicação"
         tools:layout_editor_absoluteX="108dp"
@@ -26,8 +26,8 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="200"
-        android:layout_height="70"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
         android:background="#00A1E5"
         android:text="Medalhas"
         tools:layout_editor_absoluteX="108dp"
@@ -44,7 +44,7 @@
     <Button
         android:id="@+id/button6"
         android:layout_width="421dp"
-        android:layout_height="100"
+        android:layout_height="100dp"
         android:background="#1D71B8"
         android:text="Voltar ao menu"
         android:textColor="#FFFFFF"

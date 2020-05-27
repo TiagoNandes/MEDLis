@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EtiquetaLida"></activity>
-        <activity android:name=".LerEtiqueta" />
-        <activity android:name=".Perfil" />
-        <activity android:name=".menu" />
-        <activity android:name=".Registo" />
-        <activity android:name=".login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".EtiquetaLida" android:exported="true"></activity>
+        <activity android:name=".LerEtiqueta" android:exported="true"/>
+        <activity android:name=".Perfil" android:exported="true"/>
+        <activity android:name=".menu" android:exported="true"/>
+        <activity android:name=".Registo" android:exported="true"/>
+        <activity android:name=".login" android:exported="true"/>
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
