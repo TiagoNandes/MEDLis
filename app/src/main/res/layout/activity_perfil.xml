@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Perfil">
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="200"
+        android:layout_height="70"
+        android:background="#00A1E5"
+        android:text="Editar dados"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="426dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="200"
+        android:layout_height="70"
+        android:background="#00A1E5"
+        android:text="Gerir medicação"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="527dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="200"
+        android:layout_height="70"
+        android:background="#00A1E5"
+        android:text="Medalhas"
+        tools:layout_editor_absoluteX="108dp"
+        tools:layout_editor_absoluteY="626dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/avatar_profile"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="182dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="421dp"
+        android:layout_height="100"
+        android:background="#1D71B8"
+        android:text="Voltar ao menu"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="-6dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="324dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terminar sessão"
+        android:textColor="#F44336"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="372dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/settings"
+        tools:layout_editor_absoluteX="359dp"
+        tools:layout_editor_absoluteY="109dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

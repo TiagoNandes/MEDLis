@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDAE53"
+    tools:context=".LerEtiqueta">
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="421dp"
+        android:layout_height="100"
+        android:background="#1D71B8"
+        android:text="Voltar ao menu"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="-6dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/trabalho_em_rede"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="298dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="324dp"
+        android:layout_height="132dp"
+        android:text="Aproxime o telemóvel  da etiqueta NFC"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="463dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
