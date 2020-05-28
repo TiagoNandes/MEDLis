@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "749536115575",
+    "firebase_url": "https://medlis.firebaseio.com",
+    "project_id": "medlis",
+    "storage_bucket": "medlis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749536115575:android:d34df1bc701b9b47f5ff72",
+        "android_client_info": {
+          "package_name": "com.example.medlis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749536115575-912m3vhtnvhrssl7f4pdkl47bedaujc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medlis",
+            "certificate_hash": "5c060ffb35ae506c8f31cb6da6e804f0d053bb04"
+          }
+        },
+        {
+          "client_id": "749536115575-6431cru2haejcl8hb93drc9ds3kib88e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1xAMeTAzscWQXoxmAlq2FJ0hVulWo6Gg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749536115575-6431cru2haejcl8hb93drc9ds3kib88e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
