@@ -6,59 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".menu">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="134dp"
-        android:layout_height="134dp"
-        android:background="#00A1E5"
-        app:srcCompat="@drawable/icon_awesome_user"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="341dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="134dp"
-        android:layout_height="134dp"
-        android:background="#75D72A"
-        app:srcCompat="@drawable/icon_material_notifications_active"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="506dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="134dp"
-        android:layout_height="134dp"
-        android:background="#FFCB00"
-        app:srcCompat="@drawable/icon_metro_medkit"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="506dp" />
-
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/camada"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:layout_width="274dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="134dp"
         android:layout_height="134dp"
         android:background="#FE8040"
-        app:srcCompat="@drawable/icon_awesome_tag"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="341dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549"
+        app:srcCompat="@drawable/icon_awesome_tag" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="79dp"
-        android:layout_height="18dp"
-        android:text="Ler Etiqueta"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="442dp" />
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:background="#FFCB00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825"
+        app:srcCompat="@drawable/icon_metro_medkit" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:background="#00A1E5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549"
+        app:srcCompat="@drawable/icon_awesome_user" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:background="#75D72A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.825"
+        app:srcCompat="@drawable/icon_material_notifications_active" />
 
     <TextView
         android:id="@+id/textView5"
@@ -67,18 +76,12 @@
         android:text="Medicação"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="610dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="85dp"
-        android:layout_height="21dp"
-        android:text="Notificações"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="260dp"
-        tools:layout_editor_absoluteY="610dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/imageButton4"
+        app:layout_constraintTop_toTopOf="@+id/imageButton4"
+        app:layout_constraintVertical_bias="0.896" />
 
     <TextView
         android:id="@+id/textView7"
@@ -87,7 +90,39 @@
         android:text="Perfil"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="281dp"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:layout_constraintVertical_bias="0.903" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="85dp"
+        android:layout_height="21dp"
+        android:text="Notificações"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="@+id/imageButton3"
+        app:layout_constraintTop_toTopOf="@+id/imageButton3"
+        app:layout_constraintVertical_bias="0.92" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="79dp"
+        android:layout_height="18dp"
+        android:text="Ler Etiqueta"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.887" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
