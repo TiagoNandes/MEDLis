@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/tag"
         android:layout_width="134dp"
         android:layout_height="134dp"
         android:background="#FE8040"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/icon_awesome_tag" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/medication"
         android:layout_width="134dp"
         android:layout_height="134dp"
         android:background="#FFCB00"
@@ -44,7 +44,7 @@
         app:srcCompat="@drawable/icon_metro_medkit" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/profile"
         android:layout_width="134dp"
         android:layout_height="134dp"
         android:background="#00A1E5"
@@ -57,7 +57,7 @@
         app:srcCompat="@drawable/icon_awesome_user" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/notifications"
         android:layout_width="134dp"
         android:layout_height="134dp"
         android:background="#75D72A"
@@ -76,11 +76,11 @@
         android:text="Medicação"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintBottom_toBottomOf="@+id/medication"
+        app:layout_constraintEnd_toEndOf="@+id/medication"
         app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="@+id/medication"
+        app:layout_constraintTop_toTopOf="@+id/medication"
         app:layout_constraintVertical_bias="0.896" />
 
     <TextView
@@ -90,11 +90,11 @@
         android:text="Perfil"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+        app:layout_constraintBottom_toBottomOf="@+id/profile"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
         app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"
+        app:layout_constraintStart_toStartOf="@+id/profile"
+        app:layout_constraintTop_toTopOf="@+id/profile"
         app:layout_constraintVertical_bias="0.903" />
 
     <TextView
@@ -104,11 +104,11 @@
         android:text="Notificações"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintBottom_toBottomOf="@+id/notifications"
+        app:layout_constraintEnd_toEndOf="@+id/notifications"
         app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="@+id/imageButton3"
-        app:layout_constraintTop_toTopOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="@+id/notifications"
+        app:layout_constraintTop_toTopOf="@+id/notifications"
         app:layout_constraintVertical_bias="0.92" />
 
     <TextView
@@ -118,11 +118,11 @@
         android:text="Ler Etiqueta"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/tag"
+        app:layout_constraintEnd_toEndOf="@+id/tag"
         app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/tag"
+        app:layout_constraintTop_toTopOf="@+id/tag"
         app:layout_constraintVertical_bias="0.887" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
