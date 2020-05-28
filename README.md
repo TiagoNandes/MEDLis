@@ -7,7 +7,7 @@ MEDLis is a project developed during the third year in the Web Information Syste
 
 ### Authors
 
-* **Luís Santos** - 
+* **Luís Santos** - [luisantos5](https://github.com/luisantos5)
 
 * **Sara Rodrigues** - [saravdp](https://github.com/saravdp)
 
