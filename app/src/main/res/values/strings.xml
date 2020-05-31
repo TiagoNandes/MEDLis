@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MEDLis</string>
+    <string name="facebook_app_id">691271798329869</string>
+    <string name="fb_login_protocol_scheme">fb691271798329869</string>
 </resources>

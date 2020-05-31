@@ -53,7 +53,7 @@ dependencies {
     // Used in FacebookLoginActivity.
     implementation 'com.facebook.android:facebook-login:4.42.0'
     implementation 'androidx.browser:browser:1.0.0'
-
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
     // Twitter Android SDK (only required for Twitter Login)
     implementation 'com.twitter.sdk.android:twitter-core:3.3.0'
     implementation 'com.twitter.sdk.android:twitter:3.3.0'
@@ -64,3 +64,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 }
 apply plugin: 'com.google.gms.google-services'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}

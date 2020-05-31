@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                Intent homepage = new Intent(MainActivity.this, login.class);
+                Intent homepage = new Intent(MainActivity.this, RegisterType.class);
                 startActivity(homepage);
             }
         }, timeout);

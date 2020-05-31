@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="@+id/button4"
         app:layout_constraintStart_toStartOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/logOut" />
 
     <Button
         android:id="@+id/button4"
@@ -103,12 +103,12 @@
         android:layout_marginLeft="34dp"
         android:layout_marginBottom="25dp"
         android:text="Nome"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/logOut"
+        app:layout_constraintStart_toStartOf="@+id/logOut"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
