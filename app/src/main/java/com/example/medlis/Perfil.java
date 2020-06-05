@@ -1,5 +1,6 @@
 package com.example.medlis;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -18,13 +19,23 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
+
 
 public class Perfil extends AppCompatActivity {
 
+    FirebaseFirestore fstore;
+    FirebaseAuth fAuth;
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // show The Image in a ImageView
@@ -65,6 +76,31 @@ public class Perfil extends AppCompatActivity {
             Uri photoUrl = user.getPhotoUrl();
 
             nomeText.setText(email);
+            userID = user.getUid();
+            Log.d("TAGGGGG", userID );
+
+            DocumentReference documentReference = fstore.getInstance().collection("Users").document(userID);
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    nomeText.setText(documentSnapshot.getString("name"));
+                    //profilePic.
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
            // Uri imgUri=Uri.parse("android.resource://my.package.name/"+R.drawable.image);

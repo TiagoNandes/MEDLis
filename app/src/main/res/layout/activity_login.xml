@@ -57,20 +57,22 @@
         android:layout_marginTop="340dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
+
+        android:ellipsize="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    //android:gravity="center"
     <EditText
         android:id="@+id/email"
         android:layout_width="273dp"
         android:layout_height="47dp"
         android:layout_marginTop="264dp"
         android:ems="10"
-        android:hint="Telemóvel"
-        android:inputType="textPersonName"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

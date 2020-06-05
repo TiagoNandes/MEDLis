@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,10 +14,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register2 extends AppCompatActivity {
     String name="";
@@ -27,6 +35,7 @@ public class Register2 extends AppCompatActivity {
     EditText mPassword;
     EditText mUserNumber;
     EditText mConfirmPassword;
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 // Initialize Firebase Auth
@@ -65,6 +74,7 @@ public class Register2 extends AppCompatActivity {
                     String pass = mPassword.getText().toString();
 
                     createAccount(email, pass);
+
                 }
                 else{
 
@@ -85,9 +95,21 @@ public class Register2 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            DocumentReference documentReference = fStore.collection("Users").document(user.getUid());
+                            Map<String, Object> Users = new HashMap<>();
+                            Users.put("nUtente", mUserNumber.getText().toString());
+                            Users.put("name", name);
+                            Users.put("phoneNumber", phone);
+                            documentReference.set(Users).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("TAG", "user profile is created for !!!!"+ user.getUid());
+                                }
+                            });
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success"+ user.getUid());
+
                             //updateUI(user);
                             Intent q1 = new Intent(Register2.this, login.class);
                             startActivity(q1);
@@ -106,4 +128,5 @@ public class Register2 extends AppCompatActivity {
                 });
         // [END create_user_with_email]
     }
+
 }

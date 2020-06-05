@@ -12,14 +12,9 @@
             android:id="@+id/takePic"
             android:layout_width="164dp"
             android:layout_height="120dp"
-            android:text="Tirar Fotografia" />
-
-        <Button
-            android:id="@+id/updatePic"
-            android:layout_width="278dp"
-            android:layout_height="64dp"
             android:layout_gravity="bottom"
-            android:text="Procurar na galeria" />
+            android:password="false"
+            android:text="Tirar Fotografia" />
 
     </FrameLayout>
 
