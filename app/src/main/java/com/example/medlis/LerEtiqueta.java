@@ -3,6 +3,7 @@ package com.example.medlis;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -14,6 +15,7 @@ import android.nfc.tech.MifareUltralight;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ public class LerEtiqueta extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ler_etiqueta);
         final ConstraintLayout menu = findViewById(R.id.header);
@@ -46,38 +49,61 @@ public class LerEtiqueta extends AppCompatActivity {
             finish();
             return;
         }
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, this.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
+        if (pendingIntent == null) {
+            pendingIntent = PendingIntent.getActivity(this, 0, new Intent(), 0);
+        }
+        //pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, this.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        //nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+
+        Log.e("S", "NOT"+new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+        /* super.onResume();
         if (nfcAdapter != null) {
            if (!nfcAdapter.isEnabled()) {
                 showWirelessSettings();
                 nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
             }
-        }
+        }*/
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
+        /*super.onPause();
         if (nfcAdapter != null) {
             nfcAdapter.disableForegroundDispatch(this);
-        }
+        }*/
+        super.onPause();
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        nfcAdapter.disableForegroundDispatch(this);
+        Log.e("NEwS", "NOT WORKINGLOOOLL");
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
+        /*super.onNewIntent(intent);
         setIntent(intent);
+        resolveIntent(intent);*/
+        super.onNewIntent(intent);
+        //Log.e("NES", "NOT WORKINGLOOOLL");
         resolveIntent(intent);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            resolveIntent(intent);
+            Log.e("NES", "NOT WORKINGLOOOLL");
+            // drop NFC events
+        }
     }
 
     private void resolveIntent(Intent intent) {
+        Log.e("NasS", "Entrou");
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -89,9 +115,11 @@ public class LerEtiqueta extends AppCompatActivity {
             if (rawMsgs != null) {
                 msgs = new NdefMessage[rawMsgs.length];
 
+
                 for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                 }
+                Log.e("NasS", "Entrou +"+msgs);
             } else {
                 byte[] empty = new byte[0];
                 byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
@@ -103,6 +131,7 @@ public class LerEtiqueta extends AppCompatActivity {
                 /*Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
                 startActivity(q1);*/
                 //14:46
+                Log.e("NasS", "Entrou +++"+msgs);
             }
             displayMsgs(msgs);
         }
@@ -121,7 +150,14 @@ public class LerEtiqueta extends AppCompatActivity {
             builder.append(str).append("\n");
         }
         final TextView text = findViewById(R.id.textView9);
-        text.setText(builder.toString());
+        //Log.e("NA", "Display +++"+builder.toString());
+
+        //text.setText(builder.toString());
+        writeOnDatabase(builder.toString());
+
+        Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
+
+        startActivity(q1);
     }
 
     private void showWirelessSettings() {
@@ -252,5 +288,8 @@ public class LerEtiqueta extends AppCompatActivity {
             factor *= 256l;
         }
         return result;
+    }
+    private void writeOnDatabase(String text){
+        //TODO Falta
     }
 }
