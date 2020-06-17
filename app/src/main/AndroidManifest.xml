@@ -23,25 +23,33 @@
 
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:exported="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".TakePictureActivity"
             android:label="@string/title_activity_take_picture"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".Badge"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".BadgesList"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".ManageMedication"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".FacebookLogin"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity android:name=".Register2"
+            android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".RegisterType"
