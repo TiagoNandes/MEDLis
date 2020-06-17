@@ -25,6 +25,7 @@ public class EtiquetaLida extends AppCompatActivity {
                 Intent medication = new Intent(EtiquetaLida.this, Medication.class);
                 startActivity(medication);
                 //TODO adicionar id do documento da bd
+
             }
         }, timeout);
     }

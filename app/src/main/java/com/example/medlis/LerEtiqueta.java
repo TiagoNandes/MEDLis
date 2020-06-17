@@ -23,13 +23,24 @@ import android.widget.Toast;
 
 import com.example.medlis.nfcRecords.NdefMessageParser;
 import com.example.medlis.nfcRecords.ParsedNdefRecord;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LerEtiqueta extends AppCompatActivity {
+    private static final String TAG = "TAG";
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
-
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -291,5 +302,40 @@ public class LerEtiqueta extends AppCompatActivity {
     }
     private void writeOnDatabase(String text){
         //TODO Falta
+        String[] arrOfStr = text.split(";");
+        for (String a : arrOfStr)
+           // Log.d(TAG, "arr"+a);
+        Log.d(TAG, "arr"+arrOfStr.length);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String dosage_description =arrOfStr[0];
+        String dosage_hours =arrOfStr[1];
+        String expiry_date =arrOfStr[2];
+        String id_medicine =arrOfStr[3];
+        Integer remaining_quantity = 0;
+        Object neww = text;
+        Map<String, Object> User_med = new HashMap<>();
+        User_med.put("dosage_description", dosage_description);
+        User_med.put("dosage_hours", dosage_hours);
+        User_med.put("expiry_date", expiry_date);
+        User_med.put("id_medicine", id_medicine);
+        User_med.put("remaining_quantity", remaining_quantity);//igual get med, campo boxQuantity
+
+
+        fStore.collection("Users").document(user.getUid()).collection("User_med").add(User_med);
+
+        /*Users.put("dosage_description", dosage_description);
+        Users.put("dosage_hours", dosage_hours);
+        Users.put("expiry_date", expiry_date);
+        Users.put("id_medicine", id_medicine);
+        Users.put("remaining_quantity", remaining_quantity);
+        documentReference.set(Users).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("TAG", "user profile is created for !!!!"+ user.getUid());
+            }
+        });*/
+        // Sign in success, update UI with the signed-in user's information
+        Log.d(TAG, "createUserWithEmail:success"+ user.getUid());
     }
+
 }
