@@ -20,7 +20,7 @@ public class RegisterType extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_type);
         final ImageButton email = findViewById(R.id.email);
-        final ImageButton facebook = findViewById(R.id.facebook);
+        //final ImageButton facebook = findViewById(R.id.buttonFacebookLogin2);
 
         final TextView login = findViewById(R.id.login);
 
@@ -41,13 +41,13 @@ public class RegisterType extends AppCompatActivity {
             }
         });
 
-        facebook.setOnClickListener(new View.OnClickListener() {
+        /*facebook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
 
                 Intent q1 = new Intent(RegisterType.this, FacebookLogin.class);
                 startActivity(q1);
             }
-        });
+        });*/
     }
 }

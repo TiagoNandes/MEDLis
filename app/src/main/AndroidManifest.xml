@@ -30,11 +30,16 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".Badge" />
-        <activity android:name=".BadgesList" />
-        <activity android:name=".ManageMedication" />
-        <activity android:name=".FacebookLogin" />
-        <activity android:name=".Register2" />
+        <activity android:name=".Badge"
+            android:exported="true"/>
+        <activity android:name=".BadgesList"
+            android:exported="true"/>
+        <activity android:name=".ManageMedication"
+            android:exported="true"/>
+        <activity android:name=".FacebookLogin"
+            android:exported="true"/>
+        <activity android:name=".Register2"
+            android:exported="true"/>
         <activity
             android:name=".RegisterType"
             android:exported="true" />
