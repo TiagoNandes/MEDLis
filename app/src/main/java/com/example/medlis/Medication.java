@@ -61,7 +61,7 @@ public class Medication extends AppCompatActivity {
         medicineReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                medicationName.setText("De "+documentSnapshot.getString("dosage_description")+" em "+documentSnapshot.getString("dosage_description")+"horas."+"\n"+documentSnapshot.getString("dosage_description"));
+                medicationName.setText(documentSnapshot.getString("name"));
                 //profilePic.
             }
         });
