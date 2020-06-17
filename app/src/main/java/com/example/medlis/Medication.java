@@ -3,8 +3,12 @@ package com.example.medlis;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,9 +23,12 @@ public class Medication extends AppCompatActivity {
 
     private static final String TAG = "TAG";
     FirebaseFirestore fstore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         setContentView(R.layout.activity_medication);
         Bundle extras = getIntent().getExtras();
@@ -61,9 +68,18 @@ public class Medication extends AppCompatActivity {
         medicineReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                Log.d(TAG, "LOOLALLALLALALALAL"+ documentSnapshot.getString("name"));
                 medicationName.setText(documentSnapshot.getString("name"));
-                //profilePic.
+                TextView leaflet = findViewById(R.id.textView20);
+                leaflet.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent q1 = new Intent(Medication.this, LeafletWebview.class);
+                        q1.putExtra("url", documentSnapshot.getString("leaflet"));
+                        startActivity(q1);
+                    }
+                });
             }
         });
     }
+
 }

@@ -3,105 +3,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.medlis">
 
+    <uses-sdk android:minSdkVersion="10" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"
+    <uses-permission
+        android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.NFC" />
-    <uses-sdk android:minSdkVersion="10"/>
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
 
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
 
     <application
         android:allowBackup="true"
+        android:exported="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:exported="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".LeafletWebview"
+            android:exported="true"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".TakePictureActivity"
+            android:exported="true"
             android:label="@string/title_activity_take_picture"
             android:screenOrientation="portrait"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingsActivity"
+            android:exported="true"
             android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Badge"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Badge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BadgesList"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".BadgesList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ManageMedication"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ManageMedication"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FacebookLogin"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FacebookLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Register2"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Register2"
-            android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterType"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UpdateMedicine"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Notifications"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Medication"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".EtiquetaLida"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LerEtiqueta"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Perfil"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".menu"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Registo"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login"
             android:exported="true"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
