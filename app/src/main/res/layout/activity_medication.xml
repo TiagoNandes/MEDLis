@@ -32,7 +32,7 @@
         tools:layout_editor_absoluteY="288dp" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/medName"
         android:layout_width="170dp"
         android:layout_height="58dp"
         android:gravity="center_horizontal"
@@ -44,7 +44,7 @@
         tools:layout_editor_absoluteY="402dp" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/med_posology"
         android:layout_width="234dp"
         android:layout_height="107dp"
         android:gravity="center_horizontal"

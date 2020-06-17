@@ -1,5 +1,7 @@
 package com.example.medlis;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -23,11 +25,18 @@ import android.widget.Toast;
 
 import com.example.medlis.nfcRecords.NdefMessageParser;
 import com.example.medlis.nfcRecords.ParsedNdefRecord;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -36,11 +45,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static kotlin.jvm.internal.Reflection.function;
+
 public class LerEtiqueta extends AppCompatActivity {
+    FirebaseFirestore fstore;
     private static final String TAG = "TAG";
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    private String createdIdUserMed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -108,7 +121,6 @@ public class LerEtiqueta extends AppCompatActivity {
         resolveIntent(intent);
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             resolveIntent(intent);
-            Log.e("NES", "NOT WORKINGLOOOLL");
             // drop NFC events
         }
     }
@@ -142,7 +154,6 @@ public class LerEtiqueta extends AppCompatActivity {
                 /*Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
                 startActivity(q1);*/
                 //14:46
-                Log.e("NasS", "Entrou +++"+msgs);
             }
             displayMsgs(msgs);
         }
@@ -166,9 +177,7 @@ public class LerEtiqueta extends AppCompatActivity {
         //text.setText(builder.toString());
         writeOnDatabase(builder.toString());
 
-        Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
 
-        startActivity(q1);
     }
 
     private void showWirelessSettings() {
@@ -301,41 +310,44 @@ public class LerEtiqueta extends AppCompatActivity {
         return result;
     }
     private void writeOnDatabase(String text){
-        //TODO Falta
+
         String[] arrOfStr = text.split(";");
-        for (String a : arrOfStr)
-           // Log.d(TAG, "arr"+a);
-        Log.d(TAG, "arr"+arrOfStr.length);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String dosage_description =arrOfStr[0];
         String dosage_hours =arrOfStr[1];
         String expiry_date =arrOfStr[2];
         String id_medicine =arrOfStr[3];
-        Integer remaining_quantity = 0;
-        Object neww = text;
-        Map<String, Object> User_med = new HashMap<>();
-        User_med.put("dosage_description", dosage_description);
-        User_med.put("dosage_hours", dosage_hours);
-        User_med.put("expiry_date", expiry_date);
-        User_med.put("id_medicine", id_medicine);
-        User_med.put("remaining_quantity", remaining_quantity);//igual get med, campo boxQuantity
+        final String[] remaining_quantity = {""};
+final String teste="";
 
-
-        fStore.collection("Users").document(user.getUid()).collection("User_med").add(User_med);
-
-        /*Users.put("dosage_description", dosage_description);
-        Users.put("dosage_hours", dosage_hours);
-        Users.put("expiry_date", expiry_date);
-        Users.put("id_medicine", id_medicine);
-        Users.put("remaining_quantity", remaining_quantity);
-        documentReference.set(Users).addOnSuccessListener(new OnSuccessListener<Void>() {
+        DocumentReference documentReference = fstore.getInstance().collection("Medicine").document(id_medicine);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("TAG", "user profile is created for !!!!"+ user.getUid());
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                Long remaining = documentSnapshot.getLong("boxQuantity");
+                remaining_quantity[0] = remaining.toString();
+                teste.replace("", String.valueOf(remaining));
+
+                Object neww = text;
+                Map<String, Object> User_med = new HashMap<>();
+                User_med.put("dosage_description", dosage_description);
+                User_med.put("dosage_hours", dosage_hours);
+                User_med.put("expiry_date", expiry_date);
+                User_med.put("id_medicine", id_medicine);
+                User_med.put("remaining_quantity", remaining);
+                fStore.collection("Users")
+                        .document(user.getUid())
+                        .collection("User_med")
+                        .add(User_med).addOnSuccessListener(command -> {
+                                        Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
+                                        q1.putExtra("userMedId", command.getId());
+                                        startActivity(q1);
+                        });
             }
-        });*/
-        // Sign in success, update UI with the signed-in user's information
-        Log.d(TAG, "createUserWithEmail:success"+ user.getUid());
+        });
+
+
     }
 
 }

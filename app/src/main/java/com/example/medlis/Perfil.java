@@ -77,7 +77,6 @@ public class Perfil extends AppCompatActivity {
 
             nomeText.setText(email);
             userID = user.getUid();
-            Log.d("TAGGGGG", userID );
 
             DocumentReference documentReference = fstore.getInstance().collection("Users").document(userID);
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
