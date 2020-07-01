@@ -7,7 +7,7 @@
     tools:context=".BadgesList">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraintLayout1"
         android:layout_width="416dp"
         android:layout_height="90dp"
         android:background="#1D71B8"
