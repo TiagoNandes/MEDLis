@@ -15,16 +15,18 @@
         android:textSize="24sp"
         android:textStyle="normal"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="118dp" />
+        tools:layout_editor_absoluteY="118dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="416dp"
         android:layout_height="90dp"
-        android:background="#1D71B8">
+        android:background="#1D71B8"
+        tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/imageView101"
             android:layout_width="65dp"
             android:layout_height="63dp"
             android:layout_marginStart="16dp"
@@ -36,7 +38,7 @@
             app:srcCompat="@drawable/arrow" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textView122"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -46,51 +48,66 @@
             android:textSize="24sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
+            app:layout_constraintStart_toEndOf="@+id/imageView101"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotifications"
+        android:layout_width="409dp"
+        android:layout_height="581dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintLayout21"
+    android:layout_width="416dp"
+    android:layout_height="90dp"
+    android:background="#FFCB00"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="361dp">
+
+    <ImageView
+        android:id="@+id/imageView106"
+        android:layout_width="65dp"
+        android:layout_height="63dp"
+        app:srcCompat="@drawable/check"
+        tools:layout_editor_absoluteX="335dp"
+        tools:layout_editor_absoluteY="14dp" />
+
+    <TextView
+        android:id="@+id/textView123"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clavamox"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="13dp" />
+
+    <TextView
+        android:id="@+id/textView231"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tomar 1 comprimido às 15:00h!"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="45dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="416dp"
-        android:layout_height="90dp"
-        android:background="#FFCB00"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="361dp">
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="65dp"
-            android:layout_height="63dp"
-            app:srcCompat="@drawable/check"
-            tools:layout_editor_absoluteX="335dp"
-            tools:layout_editor_absoluteY="14dp" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clavamox"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="normal|bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="13dp" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tomar 1 comprimido às 15:00h!"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="45dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/constraintLayout211"
         android:layout_width="416dp"
         android:layout_height="90dp"
         android:background="#93C630"
@@ -98,7 +115,7 @@
         tools:layout_editor_absoluteY="261dp">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/imageView108"
             android:layout_width="65dp"
             android:layout_height="63dp"
             app:srcCompat="@drawable/check"
@@ -106,7 +123,7 @@
             tools:layout_editor_absoluteY="14dp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textView182"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Clavamox"
@@ -117,7 +134,7 @@
             tools:layout_editor_absoluteY="13dp" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/textView234"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tomar 1 comprimido às 15:00h!"
@@ -125,44 +142,7 @@
             android:textSize="20sp"
             android:textStyle="normal"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="45dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="416dp"
-        android:layout_height="90dp"
-        android:background="#FF5757"
-        tools:layout_editor_absoluteY="164dp">
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="65dp"
-            android:layout_height="63dp"
-            app:srcCompat="@drawable/check"
-            tools:layout_editor_absoluteX="335dp"
-            tools:layout_editor_absoluteY="14dp" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clavamox"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="normal|bold"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="13dp" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tomar 1 comprimido às 15:00h!"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="45dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:layout_editor_absoluteY="45dp"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
