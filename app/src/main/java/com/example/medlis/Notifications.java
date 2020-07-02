@@ -1,30 +1,42 @@
 package com.example.medlis;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 
+import com.example.medlis.notifications.Notification;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static kotlin.jvm.internal.Reflection.function;
 
 public class Notifications extends AppCompatActivity {
 
     RecyclerView rvAlbuns;
     private ArrayList<com.example.medlis.notifications.Notification> albuns;
     private MyAdapterRecycler albumAdapter;
-
+    FirebaseFirestore fstore;
     private static final String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-
-
 
 
         rvAlbuns = findViewById(R.id.rvNotifications);
@@ -35,21 +47,45 @@ public class Notifications extends AppCompatActivity {
         rvAlbuns.setLayoutManager(llm);
 
 
+        albuns = new ArrayList<Notification>();
 
-        albuns = new ArrayList<com.example.medlis.notifications.Notification>();
-        albuns.add(
-                new com.example.medlis.notifications.Notification("Nevermind", "Nirvana", 1));
-        albuns.add(
-                new com.example.medlis.notifications.Notification("Just Push Play", "Aerosmith", 2));
-        albuns.add(
-                new com.example.medlis.notifications.Notification("Slippery when wet", "Bon Jovi", 2));
-        albuns.add(
-                new com.example.medlis.notifications.Notification("Return to forever", "Scorpions", 3));
-        albuns.add(
-                new com.example.medlis.notifications.Notification("Master Of Puppets", "Metallica", 5));
-        albumAdapter = new MyAdapterRecycler(albuns);
-        rvAlbuns.setAdapter(albumAdapter);
 
+        CollectionReference medicineReference = fstore.getInstance().collection("Alert");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        fstore.getInstance().collection("Alert")
+                .whereEqualTo("id_user", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String title = String.valueOf(document.getData().get("title"));
+                                String description = String.valueOf(document.getData().get("description"));
+                                Timestamp date = (Timestamp) document.getData().get("alertDate");
+                                Log.d("TAG", date.toString());
+                                Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
+                                boolean checkIntake = Boolean.parseBoolean(document.getData().get("checkIntake").toString());
+                                String id_user = String.valueOf(document.getData().get("id_user"));
+
+                                String id_userMed = String.valueOf(document.getData().get("id_userMed"));
+
+                                albuns.add(
+                                        new Notification(title, alertDate, checkIntake, description, id_user, id_userMed));
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+
+
+                        albumAdapter = new MyAdapterRecycler(albuns);
+                        rvAlbuns.setAdapter(albumAdapter);
+                    }
+
+                });
 
     }
 

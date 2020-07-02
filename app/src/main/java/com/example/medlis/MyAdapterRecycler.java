@@ -1,11 +1,11 @@
 package com.example.medlis;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.medlis.notifications.Notification;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 
 public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.ViewHolder> {
@@ -21,14 +23,14 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        protected TextView txtTitle, txtBand, imgCover;
-
+        protected TextView txtTitle, txtDescription, txtDate;
+        protected ImageButton checkIntake;
         public ViewHolder(View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitle);
-            txtBand = itemView.findViewById(R.id.txtDescription);
-            imgCover = itemView.findViewById(R.id.txtDate);
-
+            txtDescription = itemView.findViewById(R.id.txtDescription);
+            txtDate = itemView.findViewById(R.id.txtDate);
+            checkIntake = itemView.findViewById(R.id.taken);
            /* Button b = itemView.findViewById(R.id.button);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,9 +55,17 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
     @Override
     public void onBindViewHolder(@NonNull MyAdapterRecycler.ViewHolder viewHolder, int i){
         Notification item = myAlbumList.get(i);
+        Log.d("TAG", item.getTitle());
         viewHolder.txtTitle.setText(item.getTitle());
-        viewHolder.txtBand.setText(item.getBand());
-       // viewHolder.imgCover.setText(item.getCover());
+        viewHolder.txtDescription.setText(item.getDescription());
+        viewHolder.txtDate.setText(item.getAlertDate().toDate().toString());
+        if(item.getCheckIntake()==false){viewHolder.checkIntake.setVisibility(View.VISIBLE);//show
+        }
+        else {
+            viewHolder.checkIntake.setVisibility(View.GONE);//makes it disappear
+        }
+
+        // viewHolder.imgCover.setText(item.getCover());
 
        // viewHolder.imgCover.setImageResource(item.getCover());
     }
@@ -64,5 +74,6 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
     public int getItemCount(){
         return myAlbumList.size();
     }
+
 
 }
