@@ -10,7 +10,7 @@
     tools:layout_editor_absoluteY="164dp">
 
     <TextView
-        android:id="@+id/txtDescription"
+        android:id="@+id/txtMedMedicine"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -37,7 +37,7 @@
         android:textColor="#FFFFFF"
         android:textSize="23sp"
         android:textStyle="normal|bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescription"
+        app:layout_constraintBottom_toTopOf="@+id/txtMedMedicine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,11 +48,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="1dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMedMedicine" />
 
     <ImageButton
         android:id="@+id/taken"

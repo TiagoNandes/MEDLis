@@ -62,7 +62,7 @@
             tools:layout_editor_absoluteY="16dp" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/txtMedDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2x ao dia "
@@ -73,7 +73,7 @@
             tools:layout_editor_absoluteY="54dp" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/txtMedDosageHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Prazo validade: 27/04/2021"
@@ -84,7 +84,7 @@
             tools:layout_editor_absoluteY="86dp" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/txtMedExpiryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fim de caixa: 27/04/2021"

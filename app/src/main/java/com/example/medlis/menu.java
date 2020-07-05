@@ -38,7 +38,7 @@ public class menu extends AppCompatActivity {
         });
         medication.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent q1 = new Intent(menu.this, Medication.class);
+                Intent q1 = new Intent(menu.this, ListMedications.class);
                 startActivity(q1);
             }
         });

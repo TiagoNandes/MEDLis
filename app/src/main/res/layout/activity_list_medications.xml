@@ -4,58 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#93C630"
-    tools:context=".EtiquetaLida">
+    tools:context=".ListMedications">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="300dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginLeft="59dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMedications"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
-        android:layout_marginBottom="150dp"
-        android:gravity="center_horizontal"
-        android:text="Etiqueta lida"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Medicação diária"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        app:srcCompat="@drawable/check" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
+        android:id="@+id/constraintLayout1"
         android:layout_width="0dp"
         android:layout_height="90dp"
+        android:layout_marginBottom="16dp"
         android:background="#1D71B8"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/taken"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="63dp"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="19dp"
@@ -63,15 +55,16 @@
             android:layout_marginRight="23dp"
             android:layout_marginBottom="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtMedMedicine"
+            app:layout_constraintEnd_toStartOf="@+id/txtTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.51"
             app:srcCompat="@drawable/arrow" />
 
         <TextView
-            android:id="@+id/txtMedMedicine"
-            android:layout_width="203dp"
-            android:layout_height="34dp"
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="84dp"
             android:layout_marginLeft="84dp"
             android:layout_marginTop="30dp"
@@ -84,7 +77,6 @@
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
