@@ -6,14 +6,15 @@ import java.util.Date;
 
 public class Notification {
 
-    private String title;
+    private String title, notification_id;
     private Timestamp alertDate;
     private String description;
     private String id_userMed;
     private String id_user;
     private boolean checkIntake;
 
-    public Notification(String title, Timestamp alertDate, boolean checkIntake, String description, String id_user, String id_userMed ) {
+    public Notification(String notification_id, String title, Timestamp alertDate, boolean checkIntake, String description, String id_user, String id_userMed ) {
+       this.notification_id=notification_id;
         this.title = title;
         this.alertDate = alertDate;
         this.checkIntake = checkIntake;
@@ -22,6 +23,11 @@ public class Notification {
         this.id_userMed = id_userMed;
     }
 //  id_user, id_userMed
+
+    public String getNotification_id() {
+        return notification_id;
+    }
+
     public String getTitle() {
         return title;
     }

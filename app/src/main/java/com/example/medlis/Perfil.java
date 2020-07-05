@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class Perfil extends AppCompatActivity {
         final TextView nomeText = findViewById(R.id.nomeText);
         final ImageView profilePic = findViewById(R.id.profilePic);
         final ImageView settings = findViewById(R.id.settings);
+        final Button badgesList = findViewById(R.id.badgesList);
 
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -65,6 +67,12 @@ public class Perfil extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
 
                 Intent q1 = new Intent(Perfil.this, RegisterType.class);
+                startActivity(q1);
+            }
+        });
+        badgesList.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(Perfil.this, BadgesList.class);
                 startActivity(q1);
             }
         });

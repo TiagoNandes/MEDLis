@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="596dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout1"
+        android:id="@+id/header"
         android:layout_width="416dp"
         android:layout_height="90dp"
         android:background="#1D71B8"
