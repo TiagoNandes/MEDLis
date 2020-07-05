@@ -31,12 +31,12 @@
             android:background="@drawable/btn_medication"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintStart_toEndOf="@+id/txtDosageHours"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_hearing_black_48dp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txtMedMedicine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -48,13 +48,13 @@
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="normal|bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescription"
             app:layout_constraintEnd_toStartOf="@+id/imageView10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/txtMedDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -64,12 +64,12 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/textView14"
+            app:layout_constraintBottom_toTopOf="@+id/txtDosageHours"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/txtMedMedicine" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/txtMedDosageHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -81,13 +81,13 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintBottom_toTopOf="@+id/txtExpiryDate"
             app:layout_constraintEnd_toStartOf="@+id/imageView10"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/txtMedExpiryDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -99,7 +99,7 @@
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDosageHours" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

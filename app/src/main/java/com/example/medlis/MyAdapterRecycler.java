@@ -1,6 +1,5 @@
 package com.example.medlis;
 
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.medlis.notifications.Notification;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 
 public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.ViewHolder> {
@@ -28,7 +25,7 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitle);
-            txtDescription = itemView.findViewById(R.id.txtDescription);
+            txtDescription = itemView.findViewById(R.id.txtMedMedicine);
             txtDate = itemView.findViewById(R.id.txtDate);
             checkIntake = itemView.findViewById(R.id.taken);
            /* Button b = itemView.findViewById(R.id.button);

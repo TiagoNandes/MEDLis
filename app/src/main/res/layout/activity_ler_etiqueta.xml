@@ -27,14 +27,14 @@
             android:layout_marginRight="23dp"
             android:layout_marginBottom="19dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView12"
+            app:layout_constraintEnd_toStartOf="@+id/txtMedMedicine"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/arrow" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txtMedMedicine"
             android:layout_width="203dp"
             android:layout_height="34dp"
             android:layout_marginStart="84dp"

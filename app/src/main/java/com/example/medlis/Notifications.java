@@ -19,11 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
-
-import static kotlin.jvm.internal.Reflection.function;
 
 public class Notifications extends AppCompatActivity {
 
@@ -39,7 +35,7 @@ public class Notifications extends AppCompatActivity {
         setContentView(R.layout.activity_notifications);
 
 
-        rvAlbuns = findViewById(R.id.rvNotifications);
+        rvAlbuns = findViewById(R.id.rvMedications);
 
         rvAlbuns.setHasFixedSize(true);
 
