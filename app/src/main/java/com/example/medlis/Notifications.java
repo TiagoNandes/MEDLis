@@ -22,11 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
-
-import static kotlin.jvm.internal.Reflection.function;
 
 public class Notifications extends AppCompatActivity {
 
@@ -54,7 +50,7 @@ public class Notifications extends AppCompatActivity {
 
 
 
-        rvAlbuns = findViewById(R.id.rvNotifications);
+        rvAlbuns = findViewById(R.id.rvMedications);
 
         rvAlbuns.setHasFixedSize(true);
 
@@ -76,11 +72,9 @@ public class Notifications extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
                                 String title = String.valueOf(document.getData().get("title"));
                                 String description = String.valueOf(document.getData().get("description"));
                                 Timestamp date = (Timestamp) document.getData().get("alertDate");
-                                Log.d("TAG", date.toString());
                                 Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
                                 boolean checkIntake = Boolean.parseBoolean(document.getData().get("checkIntake").toString());
                                 String id_user = String.valueOf(document.getData().get("id_user"));

@@ -20,7 +20,7 @@
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/rvMedications"
+        app:layout_constraintBottom_toTopOf="@+id/rvNotifications"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

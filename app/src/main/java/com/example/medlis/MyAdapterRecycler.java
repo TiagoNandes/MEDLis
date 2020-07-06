@@ -101,7 +101,7 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
             viewHolder.checkIntake.setVisibility(View.GONE);//makes it disappear
         }
         // viewHolder.imgCover.setText(item.getCover());
-       // viewHolder.imgCover.setImageResource(item.getCover());
+        // viewHolder.imgCover.setImageResource(item.getCover());
 
     }
 

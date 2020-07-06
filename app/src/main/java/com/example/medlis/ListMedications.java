@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.medlis.notifications.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,7 +25,9 @@ public class ListMedications extends AppCompatActivity {
 
     RecyclerView rvMedications;
     private ArrayList<MedicationClass> medications;
-    private MedicationAdapterRecycler medicationAdapter;
+
+    private NewAdapterRecycler medicationAdapter;
+
     FirebaseFirestore fstore;
     private static final String TAG = "TAG";
 
@@ -34,19 +38,19 @@ public class ListMedications extends AppCompatActivity {
 
         rvMedications = findViewById(R.id.rvMedications);
 
-        rvMedications.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rvMedications.setLayoutManager(llm);
 
+        rvMedications.setHasFixedSize(true);
+
 
         medications = new ArrayList<MedicationClass>();
-
 
         CollectionReference medicineReference = fstore.getInstance().collection("Alert");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        fstore.getInstance().collection("Users").document(user.getUid()).collection("User_med")
+       fstore.getInstance().collection("Users").document(user.getUid()).collection("User_med")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -89,11 +93,12 @@ public class ListMedications extends AppCompatActivity {
                         }
 
                         Log.d("MEDICATIONS RECENTE", medications.toString());
-                        medicationAdapter = new MedicationAdapterRecycler(medications);
+                        medicationAdapter = new NewAdapterRecycler(medications);
                         rvMedications.setAdapter(medicationAdapter);
                     }
 
                 });
+
 
     }
 
