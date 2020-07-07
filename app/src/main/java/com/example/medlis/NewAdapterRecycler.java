@@ -67,7 +67,6 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
     public NewAdapterRecycler(ArrayList<MedicationClass> myAlbumList) {
 
         this.myAlbumList = myAlbumList;
-
     }
 
     public NewAdapterRecycler.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i){
