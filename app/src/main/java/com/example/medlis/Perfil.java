@@ -25,11 +25,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+
+import static java.nio.file.Paths.get;
 
 
 public class Perfil extends AppCompatActivity {
@@ -94,6 +97,34 @@ public class Perfil extends AppCompatActivity {
                     //profilePic.
                 }
             });
+
+            // Profile Photo
+            private fun takePictureIntent() {
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+                        pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
+                    startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+                }
+            }
+
+            override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+                super.onActivityResult(requestCode, resultCode, data)
+                if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    uploadImageAndSaveUri(imageBitmap)
+                }
+            }
+
+            private fun uploadImageAndSaveUri Bitmap bitmap;
+            (bitmap: Bitmap) {
+                val baos = ByteArrayOutputStream()
+                val storageRef = FirebaseStorage.getInstance()
+                        .reference
+                        .child("pics/${FirebaseAuth.getInstance().currentUser?.uid}")
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val image = baos.toByteArray()
+
+                val upload = storageRef.putBytes(image)
 
 
 
