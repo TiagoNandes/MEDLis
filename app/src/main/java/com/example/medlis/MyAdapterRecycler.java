@@ -1,8 +1,10 @@
 package com.example.medlis;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,12 +38,14 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
 
         protected TextView txtTitle, txtDescription, txtDate;
         protected ImageButton checkIntake;
+        protected ConstraintLayout layout;
         public ViewHolder(View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitle);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             txtDate = itemView.findViewById(R.id.txtDate);
             checkIntake = itemView.findViewById(R.id.taken);
+            layout = itemView.findViewById(R.id.constraintLayout29);
            /* Button b = itemView.findViewById(R.id.button);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,12 +69,23 @@ public class MyAdapterRecycler extends RecyclerView.Adapter<MyAdapterRecycler.Vi
         return new ViewHolder(itemView);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MyAdapterRecycler.ViewHolder viewHolder, int i){
         Notification item = myAlbumList.get(i);
         viewHolder.txtTitle.setText(item.getTitle());
         viewHolder.txtDescription.setText(item.getDescription());
         viewHolder.txtDate.setText(item.getAlertDate().toDate().toString());
+        //Set different colors
+        String titleValue= item.getTitle();
+        String expected= "Caixa a acabar";
+        if(item.getTitle().equals("Caixa a acabar")){
+        viewHolder.layout.setBackgroundColor(Color.parseColor("#93C630"));}
+        else if(item.getTitle().equals("Toma de medicação")){
+            viewHolder.layout.setBackgroundColor(Color.parseColor("#FF5757"));}
+        else if(item.getTitle().equals("Validade a acabar")){
+            viewHolder.layout.setBackgroundColor(Color.parseColor("#FFCB00"));}
+
         if(item.getCheckIntake()==false){
             viewHolder.checkIntake.setVisibility(View.VISIBLE);//show
             viewHolder.checkIntake.setOnClickListener(new View.OnClickListener() {

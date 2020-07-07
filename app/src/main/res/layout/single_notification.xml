@@ -5,10 +5,10 @@
     android:id="@+id/constraintLayout29"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="#FF5757"
+
     tools:ignore="MissingConstraints"
     tools:layout_editor_absoluteY="164dp">
-
+    <!--android:background="#f0f0f0"-->
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="300dp"
