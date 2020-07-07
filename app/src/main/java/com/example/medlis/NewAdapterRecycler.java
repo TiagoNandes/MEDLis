@@ -1,5 +1,7 @@
 package com.example.medlis;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medlis.notifications.Notification;
@@ -23,12 +27,15 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
     FirebaseFirestore fstore;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView txtDescription, txtDosageHours, txtExpiryDate, txtMedicine;
+
         public ViewHolder(View itemView) {
             super(itemView);
             txtDescription = itemView.findViewById(R.id.txtMedDescription);
             txtDosageHours = itemView.findViewById(R.id.txtMedDosageHours);
             txtExpiryDate = itemView.findViewById(R.id.txtMedExpiryDate);
             txtMedicine = itemView.findViewById(R.id.txtMedMedicine);
+
+
            /* Button b = itemView.findViewById(R.id.button);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
