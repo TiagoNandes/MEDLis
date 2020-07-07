@@ -58,6 +58,8 @@ public class ListMedications extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 //                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String idMed = String.valueOf(document.getId());
+
                                 String description = String.valueOf(document.getData().get("dosage_description"));
 
                                 String dosage_hours = String.valueOf(document.getData().get("dosage_hours"));
@@ -84,7 +86,7 @@ public class ListMedications extends AppCompatActivity {
                                 //    private String id_user;
 
                                 medications.add(
-                                        new MedicationClass(description, dosage_hours, expiry_date, id_medicine, remaining_quantity, id_user));
+                                        new MedicationClass(idMed, description, dosage_hours, expiry_date, id_medicine, remaining_quantity, id_user));
 
 
 

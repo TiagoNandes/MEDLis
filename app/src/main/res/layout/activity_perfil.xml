@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logOut" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnEditMed"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="29dp"
