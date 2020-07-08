@@ -14,8 +14,10 @@
         android:background="#1D71B8"
         app:layout_constraintBottom_toTopOf="@+id/toSpeech"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/txtTitle"
@@ -58,14 +60,14 @@
 
     <ImageButton
         android:id="@+id/toSpeech"
-        android:layout_width="0dp"
+        android:layout_width="225dp"
         android:layout_height="225dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="51dp"
         android:background="@drawable/btn_medication"
         android:scaleType="center"
         app:layout_constraintBottom_toTopOf="@+id/medName"
@@ -91,14 +93,13 @@
 
     <TextView
         android:id="@+id/medName"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="380dp"
+        android:layout_height="30dp"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="26dp"
         android:fontFamily="@font/bahnschrift1"
         android:gravity="center_horizontal"
         android:text="Clavamox"
@@ -107,46 +108,41 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/med_posology"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toSpeech" />
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/med_posology"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center_horizontal"
         android:text="1 comprimido de 12 em 12 horas durante 7 dias"
         android:textColor="#000000"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medName" />
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="65dp"
         android:gravity="center_horizontal"
         android:text="Consultar bula"
         android:textColor="#3F51B5"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/med_posology" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,7 @@ public class Perfil extends AppCompatActivity {
         final ImageView settings = findViewById(R.id.settings);
         final Button badgesList = findViewById(R.id.badgesList);
         final Button btnEditMed = findViewById(R.id.btnEditMed);
+        final Button btnEditProfile = findViewById(R.id.btnEditProfile);
 
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -86,6 +87,12 @@ public class Perfil extends AppCompatActivity {
                 startActivity(q1);
             }
         });
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(Perfil.this, EditProfile.class);
+                startActivity(q1);
+            }
+        });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
@@ -104,46 +111,6 @@ public class Perfil extends AppCompatActivity {
                     //profilePic.
                 }
             });
-
-            // Profile Photo
-            private fun takePictureIntent() {
-                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
-                        pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
-                    startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
-                }
-                }
-            }
-
-            override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-                super.onActivityResult(requestCode, resultCode, data)
-                if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                    val imageBitmap = data?.extras?.get("data") as Bitmap
-                    uploadImageAndSaveUri(imageBitmap)
-                }
-            }
-
-            private fun uploadImageAndSaveUri Bitmap bitmap;
-            (bitmap: Bitmap) {
-                val baos = ByteArrayOutputStream()
-                val storageRef = FirebaseStorage.getInstance()
-                        .reference
-                        .child("pics/${FirebaseAuth.getInstance().currentUser?.uid}")
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                val image = baos.toByteArray()
-
-                val upload = storageRef.putBytes(image)
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             // Check if user's email is verified

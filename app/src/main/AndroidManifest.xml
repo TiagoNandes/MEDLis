@@ -11,14 +11,8 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature
-        android:name="android.hardware.nfc"/>
-<!--        android:required="true"-->
-
-    <uses-feature
-        android:name="android.hardware.camera"/>
-<!--        android:required="true"-->
-
+    <uses-feature android:name="android.hardware.nfc" /> <!-- android:required="true" -->
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListMedications"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".ListMedications" />
         <activity
             android:name=".LeafletWebview"
             android:exported="true"

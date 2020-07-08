@@ -3,14 +3,27 @@ package com.example.medlis;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.common.util.IOUtils;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Locale;
 
 public class LeafletWebview extends AppCompatActivity {
     private WebView webView;
+
+    private TextToSpeech mTTs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +42,31 @@ public class LeafletWebview extends AppCompatActivity {
             Log.d("TAG", "https://drive.google.com/viewerng/viewer?embedded=true&url=" + url);
             webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + url);
 
+        final ImageView textSpeech = (ImageView) findViewById(R.id.btnListenningPDF); //botão
+
+        mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = mTTs.setLanguage(new Locale("pt", "pt"));
+                    if (result == TextToSpeech.LANG_MISSING_DATA ||
+                            result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supported");
+
+                    } else {
+                        textSpeech.setEnabled(true);
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
+        textSpeech.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                textToSpeech(url);
+            }
+        });
+
     }
 
     public void onUrlClick(final View view) {
@@ -44,5 +82,15 @@ public class LeafletWebview extends AppCompatActivity {
             view.loadUrl(url);
             return true;
         }
+    }
+    private String GetString(String filepath) throws IOException {
+        InputStream inputStream = new FileInputStream(filepath);
+        byte[] byteArray = IOUtils.toByteArray(inputStream);
+        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return encoded;
+    }
+    private void textToSpeech(String text) {
+
+        mTTs.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 }
