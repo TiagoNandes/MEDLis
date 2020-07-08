@@ -63,7 +63,11 @@ public class LeafletWebview extends AppCompatActivity {
         });
         textSpeech.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                textToSpeech(url);
+                try {
+                    textToSpeech(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -89,8 +93,8 @@ public class LeafletWebview extends AppCompatActivity {
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return encoded;
     }
-    private void textToSpeech(String text) {
+    private void textToSpeech(String text) throws IOException {
 
-        mTTs.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        mTTs.speak( GetString(text), TextToSpeech.QUEUE_FLUSH, null);
     }
 }
