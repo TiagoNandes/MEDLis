@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ManageMedication extends AppCompatActivity {
@@ -105,5 +106,12 @@ public class ManageMedication extends AppCompatActivity {
                 });
 
 
+
     }
+
+//    public void onDelete(int position, ArrayList list){
+//
+//        medicationAdapter.notifyItemRemoved(position);
+//        medicationAdapter.notifyItemRangeChanged(position, list.size());
+//    }
 }

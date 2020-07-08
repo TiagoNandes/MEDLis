@@ -145,6 +145,13 @@ public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterR
 
                 //Log.e("OLA BOM DIA", item.getMedicineId());
                 deleteMed(item.getMedicineId());
+//                int position = viewHolder.getPosition();
+//                Log.e("OLA BOM DIA", String.valueOf(viewHolder.getPosition()));
+//
+//                myAlbumList.remove(position);
+//                ManageMedication manageMedication = new ManageMedication();
+//                manageMedication.onDelete(position, myAlbumList);
+//               // myAlbumList.removeViewAt(position);
 
             }
         });
@@ -189,6 +196,7 @@ public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterR
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
