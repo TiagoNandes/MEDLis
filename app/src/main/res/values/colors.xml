@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="notificacao1">#FF5757</color>
+    <color name="topBar">#1D71B8</color>
+
 </resources>
