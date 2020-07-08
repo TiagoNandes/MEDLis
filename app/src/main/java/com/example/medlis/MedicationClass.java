@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp;
 
 public class MedicationClass {
 
+    private String medicine_id;
     private String description;
     private String dosage_hours;
     private String expiry_date;
@@ -11,13 +12,22 @@ public class MedicationClass {
     private int remaining_quantity;
     private String id_user;
 
-    public MedicationClass(String description, String dosage_hours, String expiry_date, String id_medicine, int remaining_quantity, String id_user ) {
+    public MedicationClass(String medicine_id, String description, String dosage_hours, String expiry_date, String id_medicine, int remaining_quantity, String id_user ) {
+        this.medicine_id = medicine_id;
         this.description = description;
         this.dosage_hours = dosage_hours;
         this.expiry_date = expiry_date;
         this.id_medicine = id_medicine;
         this.remaining_quantity = remaining_quantity;
         this.id_user = id_user;
+    }
+
+    public String getMedicineId() {
+        return medicine_id;
+    }
+
+    public void setMedicineId(String medicine_id) {
+        this.medicine_id = medicine_id;
     }
 
     public String getDescription() {

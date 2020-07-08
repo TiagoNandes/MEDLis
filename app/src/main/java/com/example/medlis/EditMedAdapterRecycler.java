@@ -1,60 +1,58 @@
 package com.example.medlis;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Constraints;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.medlis.notifications.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.concurrent.Executor;
 
 
-public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.ViewHolder> {
+public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterRecycler.ViewHolder> {
     FirebaseFirestore fstore;
+    String userID;
 
     TextToSpeech tts;
     Context context;
     private TextToSpeech mTTs;
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtDescription, txtDosageHours, txtExpiryDate, txtMedicine;
-        protected  ImageView b;
+        protected TextView txtEditMedDescription, txtEditMedDosageHours, txtEditMedExpiryDate, txtEditTitle;
+        protected ConstraintLayout singleEditMed;
+        protected ImageButton btnEditMed, btnDeleteMed;
 
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txtDescription = itemView.findViewById(R.id.txtMedDescription);
-            txtDosageHours = itemView.findViewById(R.id.txtMedDosageHours);
-            txtExpiryDate = itemView.findViewById(R.id.txtMedExpiryDate);
-            txtMedicine = itemView.findViewById(R.id.txtMedMedicine);
-            b = itemView.findViewById(R.id.imageView10);
+            txtEditMedDescription = itemView.findViewById(R.id.txtEditMedDescription);
+            txtEditMedDosageHours = itemView.findViewById(R.id.txtEditMedDosageHours);
+            txtEditMedExpiryDate = itemView.findViewById(R.id.txtEditMedExpiryDate);
+            txtEditTitle = itemView.findViewById(R.id.txtEditTitle);
+            singleEditMed = itemView.findViewById(R.id.singleEditMed);
+            btnEditMed = itemView.findViewById(R.id.btnEditMed);
+            btnDeleteMed = itemView.findViewById(R.id.btnDeleteMed);
 
 
 
@@ -64,20 +62,20 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
 
     private ArrayList<MedicationClass> myAlbumList;
 
-    public NewAdapterRecycler(ArrayList<MedicationClass> myAlbumList) {
+    public EditMedAdapterRecycler(ArrayList<MedicationClass> myAlbumList) {
 
         this.myAlbumList = myAlbumList;
     }
 
-    public NewAdapterRecycler.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i){
+    public EditMedAdapterRecycler.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i){
         this.context = viewGroup.getContext();
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_medication, viewGroup, false);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_edit_medication, viewGroup, false);
 
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewAdapterRecycler.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull EditMedAdapterRecycler.ViewHolder viewHolder, int i) {
 
         MedicationClass item = myAlbumList.get(i);
 
@@ -85,7 +83,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
         String id_medicine = item.getIdMedicine();
         String medicineName = getMedName(id_medicine);
 
-        viewHolder.txtMedicine.setText(medicineName);
+        viewHolder.txtEditTitle.setText(medicineName);
         DocumentReference documentReference = fstore.getInstance().collection("Medicine").document(id_medicine);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -94,7 +92,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
                     DocumentSnapshot document = task.getResult();
 
                     if (document.exists()) {
-                        viewHolder.txtMedicine.setText(document.getString("name").toString());
+                        viewHolder.txtEditTitle.setText(document.getString("name").toString());
                     }
 
                 }
@@ -104,9 +102,9 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
 
         //------------------------------------------ end get medication by id ----------------------------------------
 
-        viewHolder.txtDescription.setText(item.getDescription() + " de " + item.getDosageHours() + " em " + item.getDosageHours() + " horas");
-        viewHolder.txtDosageHours.setText("Comprimidos restantes: " + item.getRemainingQuantity());
-        viewHolder.txtExpiryDate.setText("Prazo Validade: " + item.getExpiryDate());
+        viewHolder.txtEditMedDescription.setText(item.getDescription() + " de " + item.getDosageHours() + " em " + item.getDosageHours() + " horas");
+        viewHolder.txtEditMedDosageHours.setText("Comprimidos restantes: " + item.getRemainingQuantity());
+        viewHolder.txtEditMedExpiryDate.setText("Prazo Validade: " + item.getExpiryDate());
 //        viewHolder.txtMedicine.setText(item.getIdMedicine());
 
 
@@ -121,7 +119,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
                             Log.e("TTS", "Language not supported");
 
                         } else {
-                            viewHolder.b.setEnabled(true);
+                            viewHolder.singleEditMed.setEnabled(true);
                         }
                 } else {
                     Log.e("TTS", "Initialization failed");
@@ -132,13 +130,32 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
 
 
 
-        viewHolder.b.setOnClickListener(new View.OnClickListener() {
+        viewHolder.singleEditMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textToRead = viewHolder.txtMedicine.getText().toString() + "         " + viewHolder.txtDescription.getText() + "         " + viewHolder.txtDosageHours.getText() + "         " + viewHolder.txtExpiryDate.getText();
+                String textToRead = viewHolder.txtEditTitle.getText().toString() + viewHolder.txtEditMedDescription.getText() + viewHolder.txtEditMedDosageHours.getText() + viewHolder.txtEditMedExpiryDate.getText();
                 textToSpeech(textToRead);
             }
         });
+
+
+        viewHolder.btnDeleteMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Log.e("OLA BOM DIA", item.getMedicineId());
+                deleteMed(item.getMedicineId());
+//                int position = viewHolder.getPosition();
+//                Log.e("OLA BOM DIA", String.valueOf(viewHolder.getPosition()));
+//
+//                myAlbumList.remove(position);
+//                ManageMedication manageMedication = new ManageMedication();
+//                manageMedication.onDelete(position, myAlbumList);
+//               // myAlbumList.removeViewAt(position);
+
+            }
+        });
+
 
 
     }
@@ -169,6 +186,27 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
             });
         return medicineName;
     }
+
+    private void deleteMed(String idMed) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+        fstore.getInstance().collection("Users").document(userID).collection("User_med").document(idMed)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
+    }
+
     private void textToSpeech(String toRead) {
         Log.d("TAG", "chegou");
         mTTs.speak(toRead, TextToSpeech.QUEUE_FLUSH, null);

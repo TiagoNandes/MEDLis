@@ -52,6 +52,7 @@ public class Perfil extends AppCompatActivity {
         final ImageView profilePic = findViewById(R.id.profilePic);
         final ImageView settings = findViewById(R.id.settings);
         final Button badgesList = findViewById(R.id.badgesList);
+        final Button btnEditMed = findViewById(R.id.btnEditMed);
 
         menu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -76,6 +77,12 @@ public class Perfil extends AppCompatActivity {
         badgesList.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent q1 = new Intent(Perfil.this, BadgesList.class);
+                startActivity(q1);
+            }
+        });
+        btnEditMed.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(Perfil.this, ManageMedication.class);
                 startActivity(q1);
             }
         });
