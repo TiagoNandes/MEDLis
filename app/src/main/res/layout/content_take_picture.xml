@@ -43,7 +43,7 @@
             android:layout_marginEnd="118dp"
             android:layout_marginRight="118dp"
             android:layout_marginBottom="30dp"
-            android:text="Voltar ao menu"
+            android:text="Voltar"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="normal"
