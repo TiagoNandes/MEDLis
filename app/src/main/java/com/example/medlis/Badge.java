@@ -64,7 +64,7 @@ public class Badge extends AppCompatActivity {
             });
             goBack.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent q1 = new Intent(Badge.this, ListMedications.class);
+                    Intent q1 = new Intent(Badge.this, BadgesList.class);
                     startActivity(q1);
                 }
             });
