@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="125dp"
     android:layout_height="200dp"
-    android:id="@+id/singleMedal1" >
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/singleMedal1">
 
     <ImageView
         android:id="@+id/badgeImage"
