@@ -2,11 +2,14 @@ package com.example.medlis;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.medlis.notifications.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +23,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListMedications extends AppCompatActivity {
 
@@ -37,7 +41,7 @@ public class ListMedications extends AppCompatActivity {
         setContentView(R.layout.activity_list_medications);
 
         rvMedications = findViewById(R.id.rvMedications);
-
+        final ConstraintLayout goBack = findViewById(R.id.constraintLayout1);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rvMedications.setLayoutManager(llm);
@@ -104,6 +108,12 @@ public class ListMedications extends AppCompatActivity {
 
                 });
 
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(ListMedications.this, menu.class);
+                startActivity(q1);
+            }
+        });
 
     }
 

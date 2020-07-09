@@ -2,6 +2,7 @@ package com.example.medlis;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,7 +44,7 @@ public class ManageMedication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_medication);
 
-
+        final ConstraintLayout goBack = findViewById(R.id.header);
 
         rvEditMedications = findViewById(R.id.rvEditMed);
 
@@ -112,9 +114,17 @@ public class ManageMedication extends AppCompatActivity {
 
                 });
 
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(ManageMedication.this, Perfil.class);
+                startActivity(q1);
+            }
+        });
 
 
     }
+
+
 
 
 

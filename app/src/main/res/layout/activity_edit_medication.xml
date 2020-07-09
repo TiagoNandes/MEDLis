@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".EditMedication">
 
-    <Button
-        android:id="@+id/editMedSavebtn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="195dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginBottom="180dp"
-        android:background="@drawable/btn_primaryblue"
-        android:text="Guardar"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editMedDescription" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="411dp"
@@ -164,5 +148,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/editMedSavebtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="195dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/btn_primaryblue"
+        android:text="Guardar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editMedDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

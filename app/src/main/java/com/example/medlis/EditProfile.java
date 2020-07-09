@@ -3,7 +3,9 @@ package com.example.medlis;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +47,8 @@ public class EditProfile extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        final ConstraintLayout goBack = findViewById(R.id.header);
 
         mName = findViewById(R.id.editProfileName);
         mPhone = findViewById(R.id.editProfilePhone);
@@ -117,7 +121,12 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(EditProfile.this, Perfil.class);
+                startActivity(q1);
+            }
+        });
 
     }
 

@@ -2,6 +2,7 @@ package com.example.medlis;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,9 +32,13 @@ public class Medication extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String[] medID = {""};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication);
         final ImageButton textSpeech = (ImageButton) findViewById(R.id.toSpeech);
+        final ConstraintLayout goBack = findViewById(R.id.header);
+
+
 
         mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -97,6 +102,13 @@ public class Medication extends AppCompatActivity {
             });
 
         }
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(Medication.this, ListMedications.class);
+                startActivity(q1);
+            }
+        });
+
     }
 
     private void writeMed(String medId) {
