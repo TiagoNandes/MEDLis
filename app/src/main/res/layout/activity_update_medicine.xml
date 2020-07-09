@@ -6,43 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".UpdateMedicine">
 
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="208dp"
-        android:layout_height="226dp"
-        android:background="#00A1E5"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257"
-        app:srcCompat="@drawable/icon_metro_medkit" />
-
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="198dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="203dp"
-        android:gravity="center_horizontal"
-        android:text="Editar Manualmente"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="0dp"
         android:layout_height="90dp"
-        android:layout_marginBottom="205dp"
         android:background="#1D71B8"
-        app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -73,34 +43,55 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="208dp"
-        android:layout_height="226dp"
-        android:background="#00A1E5"
-        android:scaleType="center"
-        android:text="Editar por NFC"
-        app:layout_constraintBottom_toBottomOf="@+id/textView24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/icon_metro_medkit" />
-
     <TextView
-        android:id="@+id/textView24"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="111dp"
+        android:id="@+id/textView21"
+        android:layout_width="198dp"
+        android:layout_height="30dp"
         android:gravity="center_horizontal"
-        android:text="Editar por NFC"
+        android:text="Editar Manualmente"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="644dp" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="262dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center_horizontal"
+        android:text="Editar por NFC"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00A1E5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton7"
-        app:layout_constraintStart_toStartOf="@+id/imageButton7"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.727"
+        app:srcCompat="@drawable/grupo_6"
+        tools:layout_editor_absoluteX="110dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:background="#00A1E5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/icon_material_nfc"
+        tools:layout_editor_absoluteY="158dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

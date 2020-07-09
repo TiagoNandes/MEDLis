@@ -95,22 +95,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_width="416dp"
+        android:layout_width="415dp"
         android:layout_height="90dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="320dp"
         android:background="#1D71B8"
         app:layout_constraintBottom_toTopOf="@+id/editProfilePhone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.072">
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageView
             android:id="@+id/taken"
             android:layout_width="65dp"
-            android:layout_height="63dp"
+            android:layout_height="65dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
