@@ -3,6 +3,8 @@ package com.example.medlis;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.BadParcelableException;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.medlis.badge.BadgeClass;
 import com.example.medlis.notifications.Notification;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,6 +37,9 @@ public class BadgesList extends AppCompatActivity {
     CollectionReference NotificationReference = fstore.getInstance().collection("Alert");
     private static final String TAG = "TAG";
 
+    RecyclerView rvAlbuns;
+    private ArrayList<BadgeClass> albuns;
+    private MyBadgesAdapterRecycler albumAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +110,46 @@ public class BadgesList extends AppCompatActivity {
                 });
 
 
+        rvAlbuns = findViewById(R.id.rvMedications);
+
+        rvAlbuns.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rvAlbuns.setLayoutManager(llm);
+
+
+        albuns = new ArrayList<BadgeClass>();
+
+
+        CollectionReference medicineReference = fstore.getInstance().collection("Alert");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String id_user= user.getUid();
+        fstore.getInstance().collection("Users").document(id_user).collection("User_badge")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id_badge = String.valueOf(document.getData().get("description"));
+                                Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
+                                java.sql.Timestamp timestamp = new java.sql.Timestamp(Long.parseLong(String.valueOf(alertDate)));
+                                albuns.add(
+                                        new BadgeClass(document.getId(),id_badge, timestamp));
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+
+
+                        albumAdapter = new MyBadgesAdapterRecycler(albuns);
+                        rvAlbuns.setAdapter(albumAdapter);
+
+
+                    }
+
+                });
 
     }
     public long printDifference(Date startDate, Date endDate) {
