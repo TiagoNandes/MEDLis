@@ -62,7 +62,12 @@ public class Badge extends AppCompatActivity {
 
                 }
             });
-
+            goBack.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent q1 = new Intent(Badge.this, ListMedications.class);
+                    startActivity(q1);
+                }
+            });
         }
     }
     private void writeBadge(String medId) {
@@ -103,5 +108,6 @@ public class Badge extends AppCompatActivity {
                 }
             }
         });
+
     }
 }
