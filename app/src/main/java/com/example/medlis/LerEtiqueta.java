@@ -349,5 +349,8 @@ final String teste="";
 
 
     }
+    private void checkIfAlreadyExists(String idTag){
 
+        //return false;
+    }
 }

@@ -2,28 +2,47 @@ package com.example.medlis;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.pdf.PdfRenderer;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.speech.tts.TextToSpeech;
-import android.util.Base64;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.android.gms.common.util.IOUtils;
+import com.google.zxing.pdf417.PDF417Reader;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 
-import java.io.FileInputStream;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.jsoup.Jsoup;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
 
 public class LeafletWebview extends AppCompatActivity {
     private WebView webView;
 
     private TextToSpeech mTTs;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +62,6 @@ public class LeafletWebview extends AppCompatActivity {
             webView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=" + url);
 
         final ImageView textSpeech = (ImageView) findViewById(R.id.btnListenningPDF); //botão
-
         mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -63,11 +81,9 @@ public class LeafletWebview extends AppCompatActivity {
         });
         textSpeech.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+
                     textToSpeech(url);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
         });
 
@@ -87,14 +103,28 @@ public class LeafletWebview extends AppCompatActivity {
             return true;
         }
     }
-    private String GetString(String filepath) throws IOException {
-        InputStream inputStream = new FileInputStream(filepath);
-        byte[] byteArray = IOUtils.toByteArray(inputStream);
-        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        return encoded;
-    }
-    private void textToSpeech(String text) throws IOException {
 
-        mTTs.speak( GetString(text), TextToSpeech.QUEUE_FLUSH, null);
+    private void textToSpeech(String text) {
+String link = "https://drive.google.com/viewerng/viewer?embedded=true&url="+text;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+
+        try {
+            String parsedText="";
+            PdfReader reader = new PdfReader(text);
+            int n = reader.getNumberOfPages();
+            for (int i = 0; i <n ; i++) {
+                parsedText   = parsedText+ PdfTextExtractor.getTextFromPage(reader, i+1).trim()+"\n"; //Extracting the content from the different pages
+            }
+            System.out.println(parsedText);
+            Log.d("RESULLTT", parsedText);
+            mTTs.speak(parsedText, TextToSpeech.QUEUE_FLUSH, null);
+            reader.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
+
+
 }
