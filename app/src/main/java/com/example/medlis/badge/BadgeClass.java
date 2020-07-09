@@ -1,6 +1,6 @@
 package com.example.medlis.badge;
 
-import java.sql.Timestamp;
+import com.google.firebase.Timestamp;
 
 public class BadgeClass {
 

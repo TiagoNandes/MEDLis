@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/badgeImage"
         android:layout_width="105dp"
         android:layout_height="107dp"
         android:layout_marginStart="30dp"
@@ -15,14 +15,14 @@
         android:layout_marginEnd="276dp"
         android:layout_marginRight="276dp"
         android:layout_marginBottom="9dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintBottom_toTopOf="@+id/titleBadge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/circlemedicinepill" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/un_date"
         android:layout_width="79dp"
         android:layout_height="18dp"
         android:layout_marginStart="42dp"
@@ -37,10 +37,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/level" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/level"
         android:layout_width="79dp"
         android:layout_height="18dp"
         android:layout_marginStart="42dp"
@@ -51,13 +51,13 @@
         android:text="(Nível 3)"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView29"
+        app:layout_constraintBottom_toTopOf="@+id/un_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/titleBadge" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/titleBadge"
         android:layout_width="79dp"
         android:layout_height="18dp"
         android:layout_marginStart="42dp"
@@ -68,9 +68,9 @@
         android:text="Assiduidade"
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView28"
+        app:layout_constraintBottom_toTopOf="@+id/level"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/badgeImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,7 +54,7 @@ public class BadgesList extends AppCompatActivity {
         });
 
         //GET ALL BADGES
-        fstore.getInstance().collection("Alert")
+      /*  fstore.getInstance().collection("Alert")
                // .whereEqualTo("id_user", user.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -107,10 +107,10 @@ public class BadgesList extends AppCompatActivity {
 
                     }
 
-                });
+                });*/
 
 
-        rvAlbuns = findViewById(R.id.rvMedications);
+        rvAlbuns = findViewById(R.id.recyclerViewBadge);
 
         rvAlbuns.setHasFixedSize(true);
 
@@ -131,13 +131,15 @@ public class BadgesList extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String id_badge = String.valueOf(document.getData().get("description"));
-                                Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
-                                java.sql.Timestamp timestamp = new java.sql.Timestamp(Long.parseLong(String.valueOf(alertDate)));
+                                Log.e("LOOOL", (String) document.getData().get("id_badge"));
+                                String id_badge = String.valueOf(document.getData().get("id_badge"));
+
+                                Timestamp date= (Timestamp) document.getData().get("unblock_date");
                                 albuns.add(
-                                        new BadgeClass(document.getId(),id_badge, timestamp));
+                                        new BadgeClass(document.getId(),id_badge, date));
 
                             }
+
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
