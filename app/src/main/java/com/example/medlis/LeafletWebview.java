@@ -1,7 +1,9 @@
 package com.example.medlis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +47,8 @@ public class LeafletWebview extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        final ConstraintLayout goBack = findViewById(R.id.header);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaflet_webview);
         webView = (WebView) findViewById(R.id.webView);
@@ -86,6 +90,13 @@ public class LeafletWebview extends AppCompatActivity {
 
             }
         });
+
+//        goBack.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent q1 = new Intent(LeafletWebview.this, Medication.class);
+//                startActivity(q1);
+//            }
+//        });
 
     }
 
