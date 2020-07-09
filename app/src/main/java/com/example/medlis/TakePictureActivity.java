@@ -35,6 +35,7 @@ import com.google.firebase.storage.UploadTask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.provider.MediaStore;
 import android.view.View;
@@ -63,16 +64,9 @@ public class TakePictureActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_picture);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        final ConstraintLayout goBack = findViewById(R.id.header);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //selectImage(TakePictureActivity.this);
-            }
-        });
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -134,6 +128,12 @@ public class TakePictureActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
 
 
+            }
+        });
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(TakePictureActivity.this, Perfil.class);
+                startActivity(q1);
             }
         });
 
