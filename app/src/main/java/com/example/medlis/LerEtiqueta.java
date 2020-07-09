@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -37,6 +38,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -54,6 +57,7 @@ public class LerEtiqueta extends AppCompatActivity {
     private PendingIntent pendingIntent;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     private String createdIdUserMed;
+private Context context = LerEtiqueta.this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -88,7 +92,7 @@ public class LerEtiqueta extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
 
-        Log.e("S", "NOT"+new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+        Log.e("S", "NOT" + new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
         /* super.onResume();
         if (nfcAdapter != null) {
            if (!nfcAdapter.isEnabled()) {
@@ -142,7 +146,7 @@ public class LerEtiqueta extends AppCompatActivity {
                 for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                 }
-                Log.e("NasS", "Entrou +"+msgs);
+                Log.e("NasS", "Entrou +" + msgs);
             } else {
                 byte[] empty = new byte[0];
                 byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
@@ -175,8 +179,8 @@ public class LerEtiqueta extends AppCompatActivity {
         //Log.e("NA", "Display +++"+builder.toString());
 
         //text.setText(builder.toString());
-        writeOnDatabase(builder.toString());
-
+       // writeOnDatabase(builder.toString());
+        checkingIfAlreadyExists(builder.toString());
 
     }
 
@@ -309,17 +313,20 @@ public class LerEtiqueta extends AppCompatActivity {
         }
         return result;
     }
-    private void writeOnDatabase(String text){
+
+    private void writeOnDatabase(String text) {
 
         String[] arrOfStr = text.split(";");
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String dosage_description =arrOfStr[0];
-        String dosage_hours =arrOfStr[1];
-        String expiry_date =arrOfStr[2];
-        String id_medicine =arrOfStr[3];
+        String id_tag_read = arrOfStr[0].replaceAll("\\s+","");
+        String dosage_description = arrOfStr[1];
+        String dosage_hours = arrOfStr[2].replaceAll("\\s+","");
+        String expiry_date = arrOfStr[3].replaceAll("\\s+","");
+        String id_medicine = arrOfStr[4].replaceAll("\\s+","");
+        Log.d("TAGGGG", arrOfStr[0]+"||"+arrOfStr[1]+"||"+arrOfStr[2]+"||"+arrOfStr[3]+"||"+arrOfStr[4]);
         final String[] remaining_quantity = {""};
-final String teste="";
+        final String teste = "";
 
         DocumentReference documentReference = fstore.getInstance().collection("Medicine").document(id_medicine);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -331,6 +338,7 @@ final String teste="";
 
                 Object neww = text;
                 Map<String, Object> User_med = new HashMap<>();
+                User_med.put("idTagRead", id_tag_read);
                 User_med.put("dosage_description", dosage_description);
                 User_med.put("dosage_hours", dosage_hours);
                 User_med.put("expiry_date", expiry_date);
@@ -340,17 +348,63 @@ final String teste="";
                         .document(user.getUid())
                         .collection("User_med")
                         .add(User_med).addOnSuccessListener(command -> {
-                                        Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
-                                        q1.putExtra("userMedId", command.getId());
-                                        startActivity(q1);
-                        });
+                    Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
+                    q1.putExtra("userMedId", command.getId());
+                    startActivity(q1);
+                });
             }
         });
 
 
     }
-    private void checkIfAlreadyExists(String idTag){
 
+   private void checkingIfAlreadyExists(final String usernameToCompare) {
+       String[] arrOfStr = usernameToCompare.split(";");
+
+       FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+       String id_tag_read = arrOfStr[0].replaceAll("\\s+","");
+       String dosage_description = arrOfStr[1];
+       String dosage_hours = arrOfStr[2].replaceAll("\\s+","");
+       String expiry_date = arrOfStr[3].replaceAll("\\s+","");
+       String id_medicine = arrOfStr[4].replaceAll("\\s+","");
+        //----------------------------------------------------------------
+        final Query mQuery = fStore.collection("Users").document(user.getUid()).collection("User_med")
+                .whereEqualTo("idTagRead", id_tag_read);
+        mQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.d(TAG, "checkingIfTagExist: checking if tag exists");
+
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot ds : task.getResult()) {
+                        String userNames = ds.getString("idTagRead");
+                        if (userNames.equals(id_tag_read)) {
+
+                            Log.d(TAG, "checkingIfusernameExist: FOUND A MATCH -username already exists");
+
+                            Toast.makeText(context, "O medicamento já existe", Toast.LENGTH_SHORT).show();
+                            Intent q1 = new Intent(LerEtiqueta.this, EtiquetaLida.class);
+                            q1.putExtra("userMedId", ds.getId());
+                            startActivity(q1);
+                        }
+                    }
+                }
+                //checking if task contains any payload. if no, then update
+                if (task.getResult().size() == 0) {
+                    try {
+                        writeOnDatabase(usernameToCompare);
+                        Log.d(TAG, "onComplete: MATCH NOT FOUND - username is available");
+                        Toast.makeText(context, "Medicamento adicionado", Toast.LENGTH_SHORT).show();
+                        //Updating new username............
+
+
+                    } catch (NullPointerException e) {
+                        Log.e(TAG, "NullPointerException: " + e.getMessage());
+                    }
+                }
+            }
+        });
         //return false;
     }
+
 }
