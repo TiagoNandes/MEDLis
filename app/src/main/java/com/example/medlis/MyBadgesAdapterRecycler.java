@@ -1,5 +1,6 @@
 package com.example.medlis;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,8 +48,9 @@ import java.util.concurrent.Executor;
 
 public class MyBadgesAdapterRecycler extends RecyclerView.Adapter<MyBadgesAdapterRecycler.ViewHolder> {
     FirebaseFirestore fstore;
+    Context context;
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
+        protected ConstraintLayout openBadge;
 
         protected TextView txtTitle, txtLevel, txtDate;
         protected ImageView badgeImage;
@@ -58,7 +60,7 @@ public class MyBadgesAdapterRecycler extends RecyclerView.Adapter<MyBadgesAdapte
             txtLevel = itemView.findViewById(R.id.level);
             txtDate = itemView.findViewById(R.id.un_date);
             badgeImage = itemView.findViewById(R.id.badgeImage);
-
+            openBadge = itemView.findViewById(R.id.singleMedal1);
            /* Button b = itemView.findViewById(R.id.button);
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,6 +81,7 @@ public class MyBadgesAdapterRecycler extends RecyclerView.Adapter<MyBadgesAdapte
 
     public MyBadgesAdapterRecycler.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i){
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.single_medal, viewGroup, false);
+        this.context = viewGroup.getContext();
         return new ViewHolder(itemView);
     }
 
@@ -129,6 +132,15 @@ public class MyBadgesAdapterRecycler extends RecyclerView.Adapter<MyBadgesAdapte
                 }
             }
         });
+        viewHolder.openBadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent q1 = new Intent(context, Badge.class);
+                q1.putExtra("BadgeId", item.get_user_badge());
+                context.startActivity(q1);
+            }
+        });
+
     }
 
       //  txtLevel = itemView.findViewById(R.id.level);
