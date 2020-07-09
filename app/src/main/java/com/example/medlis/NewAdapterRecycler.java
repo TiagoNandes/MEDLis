@@ -138,7 +138,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
             @Override
             public void onClick(View v) {
                 Intent q1 = new Intent(context, Medication.class);
-//                q1.putExtra("editMed", item.getMedicineId());
+                q1.putExtra("userMedId", item.getMedicineId());
                 context.startActivity(q1);
             }
         });

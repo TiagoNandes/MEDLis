@@ -3,6 +3,7 @@ package com.example.medlis;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -44,6 +45,8 @@ public class EditMedication extends AppCompatActivity {
         final String[] editMedId = {""};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medication);
+
+        final ConstraintLayout goBack = findViewById(R.id.header);
 
 
         description = findViewById(R.id.editMedDescription);
@@ -97,6 +100,8 @@ public class EditMedication extends AppCompatActivity {
 
                                 Log.d("TAG", "DocumentSnapshot successfully updated!");
                                 Toast.makeText(getApplicationContext(),"Dados alterados com sucesso",Toast.LENGTH_SHORT).show();
+                                Intent q1 = new Intent(EditMedication.this, ManageMedication.class);
+                                startActivity(q1);
                             }
 
                         })
@@ -109,6 +114,14 @@ public class EditMedication extends AppCompatActivity {
 
 
 
+            }
+        });
+
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(EditMedication.this, ManageMedication.class);
+                startActivity(q1);
             }
         });
 
