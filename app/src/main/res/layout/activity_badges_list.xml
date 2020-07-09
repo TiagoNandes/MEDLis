@@ -42,96 +42,15 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="106dp"
-        android:layout_height="171dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="127dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="Assiduidade"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="(Nível 3)"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="05 de Maio, 2020"
-            android:textColor="#ABABAB"
-            android:textSize="10dp"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="152dp" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="105dp"
-            android:layout_height="107dp"
-            tools:srcCompat="@drawable/circlemedicinepill" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="106dp"
-        android:layout_height="171dp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="254dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="Assiduidade"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="(Nível 3)"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="05 de Maio, 2020"
-            android:textColor="#ABABAB"
-            android:textSize="10dp"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="152dp" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="105dp"
-            android:layout_height="107dp"
-            tools:srcCompat="@drawable/circlemedicinepill" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="639dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

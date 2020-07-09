@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -31,10 +34,14 @@ public class ManageMedication extends AppCompatActivity {
     FirebaseFirestore fstore;
     private static final String TAG = "TAG";
 
+    Context appView = ManageMedication.this;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_medication);
+
 
 
         rvEditMedications = findViewById(R.id.rvEditMed);
@@ -109,6 +116,12 @@ public class ManageMedication extends AppCompatActivity {
 
     }
 
+
+
+    public void onClickEdit(){
+        Log.d("TAG", "CHEGUEI " + new Intent((Context) appView, EditMedication.class));
+
+    }
 //    public void onDelete(int position, ArrayList list){
 //
 //        medicationAdapter.notifyItemRemoved(position);

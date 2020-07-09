@@ -1,6 +1,7 @@
 package com.example.medlis;
 
 import android.content.Context;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,9 +44,11 @@ public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterR
         protected ImageButton btnEditMed, btnDeleteMed;
 
 
+        private final Context context1;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            context1 = itemView.getContext();
             txtEditMedDescription = itemView.findViewById(R.id.txtEditMedDescription);
             txtEditMedDosageHours = itemView.findViewById(R.id.txtEditMedDosageHours);
             txtEditMedExpiryDate = itemView.findViewById(R.id.txtEditMedExpiryDate);
@@ -153,6 +156,14 @@ public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterR
 //                manageMedication.onDelete(position, myAlbumList);
 //               // myAlbumList.removeViewAt(position);
 
+            }
+        });
+
+        viewHolder.btnEditMed.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent q1 = new Intent(context, EditMedication.class);
+                q1.putExtra("editMed", item.getMedicineId());
+                context.startActivity(q1);
             }
         });
 
