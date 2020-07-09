@@ -2,6 +2,7 @@ package com.example.medlis;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medlis.notifications.Notification;
@@ -45,6 +47,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         protected TextView txtDescription, txtDosageHours, txtExpiryDate, txtMedicine;
         protected  ImageView b;
+        protected ConstraintLayout openMed;
 
 
 
@@ -55,6 +58,7 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
             txtExpiryDate = itemView.findViewById(R.id.txtMedExpiryDate);
             txtMedicine = itemView.findViewById(R.id.txtMedMedicine);
             b = itemView.findViewById(R.id.imageView10);
+            openMed = itemView.findViewById(R.id.openMed);
 
 
 
@@ -126,6 +130,16 @@ public class NewAdapterRecycler extends RecyclerView.Adapter<NewAdapterRecycler.
                 } else {
                     Log.e("TTS", "Initialization failed");
                 }
+            }
+        });
+
+
+        viewHolder.openMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent q1 = new Intent(context, Medication.class);
+//                q1.putExtra("editMed", item.getMedicineId());
+                context.startActivity(q1);
             }
         });
 

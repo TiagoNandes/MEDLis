@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
-        android:layout_width="415dp"
+        android:layout_width="416dp"
         android:layout_height="90dp"
         android:background="#1D71B8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,11 +17,14 @@
 
         <ImageView
             android:id="@+id/taken"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="0dp"
+            android:layout_height="63dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.51"
@@ -29,109 +32,31 @@
 
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_width="204dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
             android:text="Voltar ao menu"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/taken"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="106dp"
-        android:layout_height="171dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="127dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="Assiduidade"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="(Nível 3)"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="05 de Maio, 2020"
-            android:textColor="#ABABAB"
-            android:textSize="10dp"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="152dp" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="105dp"
-            android:layout_height="107dp"
-            tools:srcCompat="@drawable/circlemedicinepill" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="106dp"
-        android:layout_height="171dp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="254dp">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="Assiduidade"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="116dp" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="(Nível 3)"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="134dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="79dp"
-            android:layout_height="18dp"
-            android:gravity="center_horizontal"
-            android:text="05 de Maio, 2020"
-            android:textColor="#ABABAB"
-            android:textSize="10dp"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="152dp" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="105dp"
-            android:layout_height="107dp"
-            tools:srcCompat="@drawable/circlemedicinepill" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
