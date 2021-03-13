@@ -159,13 +159,13 @@ public class EditMedAdapterRecycler extends RecyclerView.Adapter<EditMedAdapterR
             }
         });
 
-        viewHolder.btnEditMed.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent q1 = new Intent(context, EditMedication.class);
-                q1.putExtra("editMed", item.getMedicineId());
-                context.startActivity(q1);
-            }
-        });
+//        viewHolder.btnEditMed.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent q1 = new Intent(context, EditMedication.class);
+//                q1.putExtra("editMed", item.getMedicineId());
+//                context.startActivity(q1);
+//            }
+//        });
 
 
 
