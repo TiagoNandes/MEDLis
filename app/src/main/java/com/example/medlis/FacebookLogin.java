@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -28,9 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-public class FacebookLogin extends AppCompatActivity implements
-    View.OnClickListener {
+public class FacebookLogin extends AppCompatActivity {
 
         private static final String TAG = "FacebookLogin";
 
@@ -42,7 +41,7 @@ public class FacebookLogin extends AppCompatActivity implements
         // [END declare_auth]
 
         private CallbackManager mCallbackManager;
-
+        //mCallbackManager.setAutoLogAppEventsEnabled(true);
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -51,7 +50,6 @@ public class FacebookLogin extends AppCompatActivity implements
             // Views
             mStatusTextView = findViewById(R.id.status);
             mDetailTextView = findViewById(R.id.detail);
-            findViewById(R.id.buttonFacebookSignout).setOnClickListener(this);
 
             // [START initialize_auth]
             // Initialize Firebase Auth
@@ -62,7 +60,7 @@ public class FacebookLogin extends AppCompatActivity implements
             // Initialize Facebook Login button
             mCallbackManager = CallbackManager.Factory.create();
             LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
-            loginButton.setReadPermissions("email", "public_profile");
+            //loginButton.setReadPermissions("email", "public_profile");
             loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
@@ -105,7 +103,7 @@ public class FacebookLogin extends AppCompatActivity implements
             super.onActivityResult(requestCode, resultCode, data);
 
             // Pass the activity result back to the Facebook SDK
-            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+           mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
         // [END on_activity_result]
 
@@ -117,6 +115,7 @@ public class FacebookLogin extends AppCompatActivity implements
             // [END_EXCLUDE]
 
             AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+
             mAuth.signInWithCredential(credential)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -141,13 +140,12 @@ public class FacebookLogin extends AppCompatActivity implements
                     });
         }
         // [END auth_with_facebook]
-
-        public void signOut() {
+       /* public void signOut() {
             mAuth.signOut();
             LoginManager.getInstance().logOut();
 
             updateUI(null);
-        }
+        }*/
 
         private void updateUI(FirebaseUser user) {
             //hideProgressDialog();
@@ -166,11 +164,4 @@ public class FacebookLogin extends AppCompatActivity implements
             }
         }
 
-        @Override
-        public void onClick(View v) {
-            int i = v.getId();
-            if (i == R.id.buttonFacebookSignout) {
-                signOut();
-            }
-        }
 }

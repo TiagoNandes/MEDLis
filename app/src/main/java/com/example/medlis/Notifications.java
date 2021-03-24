@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 public class Notifications extends AppCompatActivity {
@@ -63,42 +64,45 @@ public class Notifications extends AppCompatActivity {
 
         CollectionReference medicineReference = fstore.getInstance().collection("Alert");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+try {
+    fstore.getInstance().collection("Alert")
+            .whereEqualTo("id_user", user.getUid())
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String title = String.valueOf(document.getData().get("title"));
+                            String description = String.valueOf(document.getData().get("description"));
+                            Timestamp date = (Timestamp) document.getData().get("alertDate");
+                            Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
+                            boolean checkIntake = Boolean.parseBoolean(document.getData().get("checkIntake").toString());
+                            String id_user = String.valueOf(document.getData().get("id_user"));
 
-        fstore.getInstance().collection("Alert")
-                .whereEqualTo("id_user", user.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String title = String.valueOf(document.getData().get("title"));
-                                String description = String.valueOf(document.getData().get("description"));
-                                Timestamp date = (Timestamp) document.getData().get("alertDate");
-                                Timestamp alertDate = (Timestamp) document.getData().get("alertDate");
-                                boolean checkIntake = Boolean.parseBoolean(document.getData().get("checkIntake").toString());
-                                String id_user = String.valueOf(document.getData().get("id_user"));
+                            String id_userMed = String.valueOf(document.getData().get("id_userMed"));
 
-                                String id_userMed = String.valueOf(document.getData().get("id_userMed"));
+                            albuns.add(
+                                    new Notification(document.getId(), title, alertDate, checkIntake, description, id_user, id_userMed));
 
-                                albuns.add(
-                                        new Notification(document.getId(),title, alertDate, checkIntake, description, id_user, id_userMed));
-
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-
-
-                        albumAdapter = new MyAdapterRecycler(albuns);
-                        rvAlbuns.setAdapter(albumAdapter);
-
-
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
 
-                });
+
+                    albumAdapter = new MyAdapterRecycler(albuns);
+                    rvAlbuns.setAdapter(albumAdapter);
 
 
+                }
+
+            });
+    }
+    catch(Exception e) {
+        //  Block of code to handle errors
+        System.out.println("erro"+ e);
+    }
     }
 
 
