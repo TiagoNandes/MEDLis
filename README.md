@@ -12,6 +12,3 @@ MEDLis is a project developed during the third year in the Web Information Syste
 * **Sara Rodrigues** - [saravdp](https://github.com/saravdp)
 
 * **Tiago Fernandes** - [TiagoNandes](https://github.com/TiagoNandes)
-
-
-* **Tiago Fernandes** 
