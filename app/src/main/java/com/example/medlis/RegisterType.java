@@ -22,6 +22,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.firebase.client.Firebase;
 import com.google.android.gms.auth.api.Auth;
@@ -43,12 +48,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.Console;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -66,13 +73,13 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient mGoogleApiClient;
     private ImageView mImageView;
     private TextView mTextViewProfile;
-
+    private CallbackManager mCallbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_type);
         final ImageButton email = findViewById(R.id.email);
-        final LoginButton facebook = findViewById(R.id.buttonFacebookLogin2);
+        final LoginButton facebook = findViewById(R.id.buttonFacebookLogin);
 
         final TextView login = findViewById(R.id.login);
         email.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +98,7 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 startActivity(q1);
             }
         });
-
+       // findViewById(R.id.buttonFacebookLogin).setOnClickListener(this);
         facebook.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -137,6 +144,29 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 updateUI(user);
             }
         };
+        // Initialize Facebook Login button
+     /*   mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+*/
+     /*       @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+                updateUI(null);
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+                updateUI(null);
+            }
+        });*/
     }
 
     @Override
@@ -157,7 +187,7 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == RC_SIGN_IN) {
+       try{ if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
@@ -167,7 +197,10 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 // Google Sign In failed, update UI appropriately
                 updateUI(null);
             }
-        }
+        }}
+       catch(Exception e ){
+           mCallbackManager.onActivityResult(requestCode, resultCode, data);
+       }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -319,6 +352,29 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 mImageView.setImageBitmap(result);*/
             }
         }
+    }
+    // auth_with_facebook
+    private void handleFacebookAccessToken(AccessToken token) {
+        //https://github.com/jirawatee/FirebaseAuth-Android/blob/master/app/src/main/java/com/example/auth/FacebookLoginActivity.java
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                if (!task.isSuccessful()) {
+                   /* mTextViewProfile.setTextColor(Color.RED);
+                    mTextViewProfile.setText(task.getException().getMessage());*/
+                } else {
+                   // mTextViewProfile.setTextColor(Color.DKGRAY);
+                    Intent q1 = new Intent(RegisterType.this, menu.class);
+                    startActivity(q1);
+                }
+
+            }
+        });
     }
 /*
     @Override
