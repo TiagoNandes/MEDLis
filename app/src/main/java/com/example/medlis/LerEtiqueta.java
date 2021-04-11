@@ -121,7 +121,6 @@ private Context context = LerEtiqueta.this;
         setIntent(intent);
         resolveIntent(intent);*/
         super.onNewIntent(intent);
-        //Log.e("NES", "NOT WORKINGLOOOLL");
         resolveIntent(intent);
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             resolveIntent(intent);
@@ -130,7 +129,6 @@ private Context context = LerEtiqueta.this;
     }
 
     private void resolveIntent(Intent intent) {
-        Log.e("NasS", "Entrou");
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
                 || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -336,7 +334,6 @@ private Context context = LerEtiqueta.this;
                 remaining_quantity[0] = remaining.toString();
                 teste.replace("", String.valueOf(remaining));
 
-                Object neww = text;
                 Map<String, Object> User_med = new HashMap<>();
                 User_med.put("idTagRead", id_tag_read);
                 User_med.put("dosage_description", dosage_description);

@@ -1,6 +1,7 @@
 package com.example.medlis;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +47,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -54,6 +58,15 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Console;
 import java.io.InputStream;
@@ -74,6 +87,8 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     private ImageView mImageView;
     private TextView mTextViewProfile;
     private CallbackManager mCallbackManager;
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    private Context context = RegisterType.this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +153,52 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                     user = FirebaseAuth.getInstance().getCurrentUser();
+                     String userId = user.getUid();
+                    final Query mQuery = fStore.collection("Users")
+                            .whereEqualTo("idTagRead", userId);
+                    mQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            Log.d(TAG, "checkingIfTagExist: checking if tag exists");
+                            Toast.makeText(context, task.toString(), Toast.LENGTH_LONG).show();
+
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, task.toString(), Toast.LENGTH_LONG).show();
+
+                                for (DocumentSnapshot ds : task.getResult()) {
+                                    String userNames = ds.getString("idTagRead");
+                                    Toast.makeText(context, ds.toString(), Toast.LENGTH_LONG).show();
+                                    if (userNames.equals(userId)) {
+
+                                        Log.d(TAG, "checkingIfusernameExist: FOUND A MATCH -username already exists");
+
+                                        Toast.makeText(context, "O utilizador já existe", Toast.LENGTH_SHORT).show();
+                                        Intent q1 = new Intent(RegisterType.this, menu.class);
+                                        q1.putExtra("userId", ds.getId());
+                                        startActivity(q1);
+                                    }
+                                    else{
+
+                                    }
+                                }
+                            }
+                            //checking if task contains any payload. if no, then update
+                            if (task.getResult().size() == 0) {
+                                try {
+                                    Log.d(TAG, "onComplete: MATCH NOT FOUND - username is available");
+                                    Intent q1 = new Intent(RegisterType.this, RegisterSocialNetworks.class);
+                                    startActivity(q1);
+                                    //Updating new username............
+
+
+                                } catch (NullPointerException e) {
+                                    Log.e(TAG, "NullPointerException: " + e.getMessage());
+                                }
+                            }
+                        }
+                    });
+
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
