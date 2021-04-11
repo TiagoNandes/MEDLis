@@ -156,8 +156,8 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                      user = FirebaseAuth.getInstance().getCurrentUser();
                      String userId = user.getUid();
                     final Query mQuery = fStore.collection("Users")
-                            .whereEqualTo("idTagRead", userId);
-                    mQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            .whereEqualTo("id", userId);
+                   /* mQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             Log.d(TAG, "checkingIfTagExist: checking if tag exists");
@@ -197,8 +197,29 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                                 }
                             }
                         }
-                    });
+                    });*/
+                    FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+                    DocumentReference docIdRef = rootRef.collection("Users").document(userId);
+                    docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "Document exists!");
+                                    Intent q1 = new Intent(RegisterType.this, menu.class);
 
+                                    startActivity(q1);
+                                } else {
+                                    Log.d(TAG, "Document does not exist!");
+                                    Intent q1 = new Intent(RegisterType.this, RegisterSocialNetworks.class);
+                                    startActivity(q1);
+                                }
+                            } else {
+                                Log.d(TAG, "Failed with: ", task.getException());
+                            }
+                        }
+                    });
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
