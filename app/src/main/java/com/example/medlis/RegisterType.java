@@ -73,13 +73,13 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-public class RegisterType extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class RegisterType extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 //        private static final String TAG = "SignInActivity";
 //        private static final int RC_SIGN_IN = 9001;
 
- //       private GoogleApiClient mGoogleApiClient;
- private static final String TAG = "GoogleSignInActivity";
+    //       private GoogleApiClient mGoogleApiClient;
+    private static final String TAG = "GoogleSignInActivity";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -89,13 +89,14 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     private CallbackManager mCallbackManager;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     private Context context = RegisterType.this;
+    private Boolean wasGoogle = false;
+    private Boolean wasFacebook = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_type);
         final ImageButton email = findViewById(R.id.email);
-        final LoginButton facebook = findViewById(R.id.buttonFacebookLogin);
-
         final TextView login = findViewById(R.id.login);
         email.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -113,26 +114,42 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 startActivity(q1);
             }
         });
-       // findViewById(R.id.buttonFacebookLogin).setOnClickListener(this);
-        facebook.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        // findViewById(R.id.buttonFacebookLogin).setOnClickListener(this);
+// Initialize Facebook Login button
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
 
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                wasFacebook = true;
+                Log.d(TAG, "-----------------------------------------------------------------------------------------------------------*********facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
 
-                // Intent q1 = new Intent(RegisterType.this, FacebookLogin.class);
-                // startActivity(q1);
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+                updateUI(null);
+            }
 
-                Intent q1 = new Intent(RegisterType.this, FacebookLogin.class);
-                startActivityForResult(q1, RC_SIGN_IN);
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+
+                updateUI(null);
             }
         });
-        mImageView = findViewById(R.id.logo);
-     //   mTextViewProfile = findViewById(R.id.profile);
+
+        mImageView = findViewById(R.id.profilePic);
+        //   mTextViewProfile = findViewById(R.id.profile);
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(this);
 
-       // findViewById(R.id.sign_out_button).setOnClickListener(this);
+        // findViewById(R.id.sign_out_button).setOnClickListener(this);
         //findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         // Configure Google Sign In
@@ -153,51 +170,10 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                     user = FirebaseAuth.getInstance().getCurrentUser();
-                     String userId = user.getUid();
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String userId = user.getUid();
                     final Query mQuery = fStore.collection("Users")
                             .whereEqualTo("id", userId);
-                   /* mQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            Log.d(TAG, "checkingIfTagExist: checking if tag exists");
-                            Toast.makeText(context, task.toString(), Toast.LENGTH_LONG).show();
-
-                            if (task.isSuccessful()) {
-                                Toast.makeText(context, task.toString(), Toast.LENGTH_LONG).show();
-
-                                for (DocumentSnapshot ds : task.getResult()) {
-                                    String userNames = ds.getString("idTagRead");
-                                    Toast.makeText(context, ds.toString(), Toast.LENGTH_LONG).show();
-                                    if (userNames.equals(userId)) {
-
-                                        Log.d(TAG, "checkingIfusernameExist: FOUND A MATCH -username already exists");
-
-                                        Toast.makeText(context, "O utilizador já existe", Toast.LENGTH_SHORT).show();
-                                        Intent q1 = new Intent(RegisterType.this, menu.class);
-                                        q1.putExtra("userId", ds.getId());
-                                        startActivity(q1);
-                                    }
-                                    else{
-
-                                    }
-                                }
-                            }
-                            //checking if task contains any payload. if no, then update
-                            if (task.getResult().size() == 0) {
-                                try {
-                                    Log.d(TAG, "onComplete: MATCH NOT FOUND - username is available");
-                                    Intent q1 = new Intent(RegisterType.this, RegisterSocialNetworks.class);
-                                    startActivity(q1);
-                                    //Updating new username............
-
-
-                                } catch (NullPointerException e) {
-                                    Log.e(TAG, "NullPointerException: " + e.getMessage());
-                                }
-                            }
-                        }
-                    });*/
                     FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
                     DocumentReference docIdRef = rootRef.collection("Users").document(userId);
                     docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -226,34 +202,14 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 updateUI(user);
             }
         };
-        // Initialize Facebook Login button
-     /*   mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-*/
-     /*       @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                updateUI(null);
-            }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                updateUI(null);
-            }
-        });*/
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        Toast.makeText(this, "listner: " + FirebaseAuth.getInstance().getCurrentUser(), Toast.LENGTH_LONG).show();
+
         mAuth.addAuthStateListener(mAuthListener);
     }
 
@@ -268,26 +224,31 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-       try{ if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed, update UI appropriately
-                updateUI(null);
+        Toast.makeText(this, "res1: " + requestCode, Toast.LENGTH_LONG).show();
+        if (requestCode == RC_SIGN_IN) {
+            try {
+                if (requestCode == RC_SIGN_IN) {
+                    GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                    if (result.isSuccess()) {
+                        // Google Sign In was successful, authenticate with Firebase
+                        GoogleSignInAccount account = result.getSignInAccount();
+                        firebaseAuthWithGoogle(account);
+                    } else {
+                        // Google Sign In failed, update UI appropriately
+                        updateUI(null);
+                    }
+                }
+            } catch (Exception e) {
+                mCallbackManager.onActivityResult(requestCode, resultCode, data);
             }
-        }}
-       catch(Exception e ){
-           mCallbackManager.onActivityResult(requestCode, resultCode, data);
-       }
+        } else {
+
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        //showProgressDialog();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -295,12 +256,10 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                 if (!task.isSuccessful()) {
-              /*      mTextViewProfile.setTextColor(Color.RED);
-                    mTextViewProfile.setText(task.getException().getMessage());*/
+
                 } else {
-//                    mTextViewProfile.setTextColor(Color.DKGRAY);
+
                 }
-              //  hideProgressDialog();
             }
         });
     }
@@ -312,7 +271,7 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
 
     private void signOut() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-       // alert.setMessage(R.string.logout);
+        // alert.setMessage(R.string.logout);
         alert.setCancelable(false);
         alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
@@ -341,7 +300,7 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
 
     private void revokeAccess() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-       // alert.setMessage(R.string.logout);
+        // alert.setMessage(R.string.logout);
         alert.setCancelable(false);
         alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
@@ -371,27 +330,19 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             if (user.getPhotoUrl() != null) {
-                new DownloadImageTask().execute(user.getPhotoUrl().toString());
+                new RegisterType.DownloadImageTask().execute(user.getPhotoUrl().toString());
             }
             String name = user.getDisplayName();
-      /*      mTextViewProfile.setText("DisplayName: " + user.getDisplayName());
-            mTextViewProfile.append("\n\n");
-            mTextViewProfile.append("Email: " + user.getEmail());
-            mTextViewProfile.append("\n\n");
-            mTextViewProfile.append("Firebase ID: " + user.getUid());*/
+
             Toast.makeText(this, "DisplayName: " + name, Toast.LENGTH_LONG).show();
             Intent q1 = new Intent(RegisterType.this, menu.class);
             startActivity(q1);
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-          //  findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.buttonFacebookLogin).setVisibility(View.GONE);
         } else {
-           // mImageView.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 64;
-           // mImageView.setImageResource(R.mipmap.authentication);
-         //   mTextViewProfile.setText(null);
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-         //   findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            findViewById(R.id.buttonFacebookLogin).setVisibility(View.VISIBLE);
         }
-      //  hideProgressDialog();
     }
 
     @Override
@@ -414,7 +365,53 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
                 break;*/
         }
     }
+    // auth_with_facebook
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                if (!task.isSuccessful()) {
 
+                    FirebaseUser user =  FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String userId = user.getUid();
+                    final Query mQuery = fStore.collection("Users")
+                            .whereEqualTo("id", userId);
+                    FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+                    DocumentReference docIdRef = rootRef.collection("Users").document(userId);
+                    docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "Document exists!");
+                                    Intent q1 = new Intent(RegisterType.this, menu.class);
+
+                                    startActivity(q1);
+                                } else {
+                                    Log.d(TAG, "Document does not exist!");
+                                    Intent q1 = new Intent(RegisterType.this, RegisterSocialNetworks.class);
+                                    startActivity(q1);
+                                }
+                            } else {
+                                Log.d(TAG, "Failed with: ", task.getException());
+                            }
+                        }
+                    });
+                    }
+                } else {
+                  //  mTextViewProfile.setTextColor(Color.DKGRAY);
+                }
+                //  hideProgressDialog();
+            }
+        });
+    }
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         @Override
         protected Bitmap doInBackground(String... urls) {
@@ -430,204 +427,10 @@ public class RegisterType extends AppCompatActivity implements GoogleApiClient.O
         @Override
         protected void onPostExecute(Bitmap result) {
             if (result != null) {
-/*                mImageView.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
+               /* mImageView = findViewById(R.id.profilePic);
+                mImageView.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
                 mImageView.setImageBitmap(result);*/
             }
         }
     }
-    // auth_with_facebook
-    private void handleFacebookAccessToken(AccessToken token) {
-        //https://github.com/jirawatee/FirebaseAuth-Android/blob/master/app/src/main/java/com/example/auth/FacebookLoginActivity.java
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                if (!task.isSuccessful()) {
-                   /* mTextViewProfile.setTextColor(Color.RED);
-                    mTextViewProfile.setText(task.getException().getMessage());*/
-                } else {
-                   // mTextViewProfile.setTextColor(Color.DKGRAY);
-                    Intent q1 = new Intent(RegisterType.this, menu.class);
-                    startActivity(q1);
-                }
-
-            }
-        });
-    }
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_type);
-        final ImageButton email = findViewById(R.id.email);
-        final LoginButton facebook = findViewById(R.id.buttonFacebookLogin2);
-
-        final TextView login = findViewById(R.id.login);
-       // mAuth = FirebaseAuth.getInstance();
-        email.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-           //     FirebaseAuth.getInstance().signOut();
-
-                Intent q1 = new Intent(RegisterType.this, Registo.class);
-                startActivity(q1);
-            }
-        });
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-               // FirebaseAuth.getInstance().signOut();
-
-                Intent q1 = new Intent(RegisterType.this, login.class);
-                startActivity(q1);
-            }
-        });
-
-        facebook.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-
-               // Intent q1 = new Intent(RegisterType.this, FacebookLogin.class);
-               // startActivity(q1);
-
-                Intent q1 = new Intent(RegisterType.this, FacebookLogin.class);
-                startActivityForResult(q1, RC_SIGN_IN);
-            }
-        });
-        //Google
-        // Configure sign-in to request the user's ID, email address, and basic
-// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-
-        createRequest();
-
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                signIn();
-                //startActivityForResult(signInIntent, RC_SIGN_IN);
-                // Using a redirect.
-          /*      mAuth.getRedirectResult().then(function(result) {
-                    if (result.credential) {
-                        // This gives you a Google Access Token.
-                        var token = result.credential.accessToken;
-                    }
-                    var user = result.user;
-                });
-
-// Start a sign in process for an unauthenticated user.
-                var provider = new firebase.auth.GoogleAuthProvider();
-                provider.addScope('profile');
-                provider.addScope('email');
-                firebase.auth().signInWithRedirect(provider);*/
-            }
-/*
-
-        });
-    }
-
-    private void createRequest() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // [END configure_signin]
-
-        // [START build_client]
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)                .enableAutoManage(this /* FragmentActivity */
-//, this /* OnConnectionFailedListener */)
-       /*         .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        // [END build_client]
-
-        // [START customize_button]
-        // Set the dimensions of the sign-in button.
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-        // [END customize_button]
-    }
-
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    public void updateUI(GoogleSignInAccount account) {
-        Log.d(TAG, String.valueOf(account));
-        mAuth = FirebaseAuth.getInstance();
-        Toast.makeText(RegisterType.this, mAuth.toString(),
-                Toast.LENGTH_SHORT).show();
-
-    }
-
-   @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String idToken = account.getId();
-
-            Toast.makeText(RegisterType.this, idToken +"\n"+ account.getServerAuthCode() + "\n"+ account.getIdToken() ,
-                    //retorna valor, null, null
-                    Toast.LENGTH_LONG).show();
-            firebaseAuthWithGoogle(idToken, account);
-
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(RegisterType.this, "signInResult:failed code=" + e.getStatusCode(),
-                    Toast.LENGTH_LONG).show();
-            updateUI(null);
-        }
-    }
-
-   private void firebaseAuthWithGoogle(String idToken, GoogleSignInAccount mGoogleSignInClient) {
-       Toast.makeText(RegisterType.this, idToken,
-               Toast.LENGTH_LONG).show(); //retorna valor
-
-        if(idToken != null && idToken != "") {
-            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-            mAuth = FirebaseAuth.getInstance();
-        //    AuthCredential credential = mAuth.GoogleAuthProvider.credential(idToken);
-            mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithCredential:success");
-                                // Signed in successfully, show authenticated UI.
-                                updateUI(mGoogleSignInClient);
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(RegisterType.this, "signInWithCredential:success",
-                                        Toast.LENGTH_SHORT).show();
-                                  Intent q1 = new Intent(RegisterType.this, menu.class);
-                                  startActivity(q1);
-
-                            } else {
-                                // If sign in fails, display a message to the user. ERROR malformed or has expired
-                                Log.w(TAG, "signInWithCredential:failure", task.getException());
-                                Toast.makeText(RegisterType.this, "signInWithCredential:failure"+ task.getException(),
-                                        Toast.LENGTH_LONG).show();
-                                //    Snackbar.make(mBinding.mainLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                                updateUI(null);
-                            }
-                        }
-                    });
-        }
-    }*/
-
-//}
+}

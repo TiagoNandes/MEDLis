@@ -65,10 +65,6 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FacebookLogin"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Register2"
             android:exported="true"
             android:screenOrientation="portrait" />
